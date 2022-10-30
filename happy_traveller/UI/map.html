@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> MAP </title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+        body {
+            background-image: url('images/2028728.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h2>My Google Maps Demo</h2>
+    <h3>Happy traveler App</h3>
+    <h1> Project</h1></center>
+
+<div id="map"></div>
+<script>
+    //let map;
+    function initMap(){
+        // const location = {lat: 48.83, lng: 2.348};
+         map = new google.maps.Map(document.getElementById("map"),{
+            zoom: 8,
+             center: new google.maps.LatLng(48.8, 2.90),
+            mapTypeId: "terrain",
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        const script = document.createElement("script");
+
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src =
+            "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
+        document.getElementsByTagName("head")[0].appendChild(script);
+        // const infoWindow = new google.maps.InfoWindow({
+        //     content: "",
+        //     disableAutoPan: true,
+        // });
+        //
+        // // Create an array of alphabetical characters used to label the markers.
+        // const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        //
+        // // Add some markers to the map.
+        // const markers = locations.map((location, i) => {
+        //     const label = labels[i % map.length];
+        //     const marker = new google.maps.Marker({
+        //         position: location,
+        //         map: map,
+        //     });
+        //
+        //     marker.addListener("click", () => {
+        //         infoWindow.setContent(label);
+        //         infoWindow.open(map, marker);
+        //     });
+        //     return marker;
+        // });
+        //
+        // // Add a marker clusterer to manage the markers.
+        // new MarkerClusterer({ markers, map });
+    }
+    // const locations = [
+    //     { lat: 48.78, lng: 2.05 },
+    //     { lat: 48.95, lng: 2.50 },
+    //     { lat: 48.90, lng: 2.70 },
+    // ];
+    const eqfeed_callback = function (results) {
+        for (let i = 0; i < results.features.length; i++) {
+            const coords = results.features[i].geometry.coordinates;
+            const latLng = new google.maps.LatLng(coords[1], coords[0]);
+
+            new google.maps.Marker({
+                position: latLng,
+                map: map,
+            });
+        }
+    };
+    window.initMap = initMap;
+    window.eqfeed_callback = eqfeed_callback;
+</script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI&callback=initMap&v=weekly"
+        defer
+></script>
+<!--<textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>-->
+
+</body>
+</html>

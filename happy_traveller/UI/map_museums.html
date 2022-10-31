@@ -32,7 +32,7 @@
     <h1> Project</h1></center>
 <div id="map"></div>
 <center>
-    <a href="" class="btn">Filters</a>
+    <h1>Filters</h1>
 </center>
 <div class="header">
     <div class="container">
@@ -56,7 +56,6 @@
 <script>
     //let map;
     function initMap(){
-
          map = new google.maps.Map(document.getElementById("map"),{
             zoom: 10,
             center: new google.maps.LatLng(48.89, 2.36),
@@ -66,15 +65,18 @@
         // Create a <script> tag and set the USGS URL as the source.
         const script = document.createElement("script");
 
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src =
+            "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=0c42b0411f9852d52d31cd1445ad3b09&tags=Paris+city&has_geo=&format=json&auth_token=72157720862474948-249f8a04d071e7d8&api_sig=c58dc867134f730c004de28876feae24";
+        document.getElementsByTagName("head")[0].appendChild(script);
         const infoWindow = new google.maps.InfoWindow({
             content: "",
             disableAutoPan: true,
-            title: "Museum",
         });
 
         // Create an array of alphabetical characters used to label the markers.
         const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 
         // Add some markers to the map.
         const markers = locations.map((location, i) => {
@@ -84,17 +86,12 @@
                 map: map,
             });
 
-
-
             marker.addListener("click", () => {
                 infoWindow.setContent(label);
                 infoWindow.open(map, marker);
             });
             return marker;
         });
-        infoWindow.addListener('closeclick', ()=>{
-        // Handle focus manually.
-         });
 
         // Add a marker clusterer to manage the markers.
         new MarkerClusterer({ markers, map });
@@ -104,10 +101,6 @@
         { lat: 48.87395, lng: 2.32910 },
         { lat: 48.85830, lng: 2.31550 },
         { lat: 48.86708, lng: 2.29898 },
-        { lat: 48.89397, lng: 2.37218 },
-        { lat: 48.87411, lng: 2.34208 },
-        { lat: 48.86196, lng: 2.33738 },
-        { lat: 48.86128, lng: 2.26743 },
     ];
 
     window.initMap = initMap;

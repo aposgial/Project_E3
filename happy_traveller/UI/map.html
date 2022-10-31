@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title> MAP </title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         *{
             margin: 0;
@@ -30,6 +34,22 @@
     <h2>My Google Maps Demo</h2>
     <h3>Happy traveler App</h3>
     <h1> Project</h1></center>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Museum</a></li>
+                    <li><a href="products.html">Theaters</a></li>
+                    <li><a href="About.html">Galleries</a></li>
+                    <li><a href="Contact.html">Statues</a></li>
+                    <li><a href="signedup.php">Catacombs</a></li>
+                </ul>
+            </nav>
+            </div>
+         </div>
+</div>
 
 <div id="map"></div>
 <script>
@@ -83,6 +103,8 @@
         { lat: 48.86708, lng: 2.29898 },
         { lat: 48.89397, lng: 2.37218 },
         { lat: 48.87411, lng: 2.34208 },
+        { lat: 48.86196, lng: 2.33738 },
+        { lat: 48.86128, lng: 2.26743 },
     ];
     // const eqfeed_callback = function (results) {
     //     for (let i = 0; i < results.features.length; i++) {
@@ -102,6 +124,19 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI&callback=initMap&v=weekly"
         defer
 ></script>
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px"){
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+</script>
 <!--<textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>-->
 
 </body>

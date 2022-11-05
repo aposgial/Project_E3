@@ -4,3 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def home(request):
     return render(request, 'WebApp_core/home.html')
+
+def map(request):
+    return render(request, 'WebApp_core/map.html')

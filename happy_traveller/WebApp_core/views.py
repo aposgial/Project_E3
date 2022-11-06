@@ -7,3 +7,9 @@ def home(request):
 
 def map(request):
     return render(request, 'WebApp_core/map.html')
+
+def maptest(request):
+    return render(request, 'WebApp_core/maptest.html')
+
+def im(request):
+    return render(request, 'WebApp_core/im.html')

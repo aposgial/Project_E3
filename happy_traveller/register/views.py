@@ -74,7 +74,7 @@ def signup_view(request):
             form.save()
             user = authenticate(request, username=data['username'], password=data['password2'])
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect(success_url,)
+            return redirect(success_url)
     else:
         form = SingupForm()
     return render(request, template_name, {"form":form})
@@ -89,9 +89,10 @@ def signin_view(request):
         print(data)
         form = SigninForm(data)
         if form.is_valid():
-            user = authenticate(request, username=data['username'], password=data['password'])
+        	user = authenticate(request, username=data['username'], password=data['password'])
             if user is not None:
                 login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+				
                 return redirect(success_url)
     else:
         form = SigninForm()

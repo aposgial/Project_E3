@@ -1,0 +1,4 @@
+reCAPTCHA_site_key in the HTML code your site serves to users = 6Le5p-AiAAAAAPdjK2MAPyKYAVRx2w7t-iQB01q-
+reCAPTCHA_secret_key for communication between your site and reCAPTCHA = 6Le5p-AiAAAAALxTvL3m0_8oiqitkYxBNeSLNq-Y
+
+google_api_key = AIzaSyAJZDGeYQJP8qtjLERuIU3DhKcV1JkLqrY

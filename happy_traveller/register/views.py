@@ -16,11 +16,7 @@ from happy_traveller.mixins import(
 	)
 
 
-from .forms import (
-	UserForm,
-	UserProfileForm,
-	AuthForm,
-	)
+from .forms import *
 
 result = "Error"
 message = "There was an error, please try again"
@@ -35,7 +31,7 @@ class AccountView(TemplateView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
-
+'''
 # allow users to update their profile
 def profile_view(request):
 	user = request.user
@@ -63,8 +59,46 @@ def profile_view(request):
 		context['base_country'] = settings.BASE_COUNTRY
 
 		return render(request, 'register/profile.html', context)
+'''
 
 
+
+def signup_view(request):
+    template_name = "register/sign_up.html"
+    success_url = "/"
+
+    if request.method == 'POST':
+        data = request.POST
+        form = SingupForm(data)
+        if form.is_valid():
+            form.save()
+            user = authenticate(request, username=data['username'], password=data['password2'])
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect(success_url,)
+    else:
+        form = SingupForm()
+    return render(request, template_name, {"form":form})
+
+
+def signin_view(request):
+    template_name = "register/sign_in.html"
+    success_url = "/"
+
+    if request.method == 'POST':
+        data = request.POST
+        print(data)
+        form = SigninForm(data)
+        if form.is_valid():
+            user = authenticate(request, username=data['username'], password=data['password'])
+            if user is not None:
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect(success_url)
+    else:
+        form = SigninForm()
+    return render(request, template_name, {"form":form})
+
+
+'''
 # sign-up with reCAPTURE security 
 class SignUpView(FormView):
 	template_name = "register/sign_up.html"
@@ -130,10 +164,10 @@ class SignInView(FormView):
 			data = {'result': result, 'message': message}
 			return JsonResponse(data)
 		#return response
-
+'''
 
 
 # user sign out
 def sign_out(request):
-	logout(request)
+	#logout(request)
 	return redirect(request, "sign_out.html")

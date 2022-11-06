@@ -132,9 +132,9 @@ STATICFILES_DIRS = [
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_URL = "login" #signin page
-LOGIN_REDIRECT_URL = "profile" #profile page
-LOGOUT_REDIRECT_URL = "/" #home page
+#LOGIN_URL = "/" #signin page
+#LOGIN_REDIRECT_URL = "/" #profile page
+#LOGOUT_REDIRECT_URL = "/" #home page
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

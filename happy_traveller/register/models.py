@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 # built-in User Model extender
-class UserProfile(models.Model):
+class Profile(models.Model):
 
 	timestamp = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
@@ -21,4 +21,4 @@ class UserProfile(models.Model):
 	is_active = models.BooleanField(default = True)
 
 	def __str__(self):
-		return self.user.email
+		return self.address

@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register import views as register_views
+from google_APIs import views as google_APIs_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_views.register, name='register'),
     path('', include('django.contrib.auth.urls')),
     path('', include('WebApp_core.urls')),
+    path('data/', google_APIs_views.api_data,name='data'),
 ]

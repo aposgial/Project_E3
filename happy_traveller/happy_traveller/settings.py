@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'WebApp_core.apps.WebappCoreConfig',
     'register.apps.RegisterConfig',
+    'google_APIs.apps.GoogleApisConfig',
 ]
 
 MIDDLEWARE = [
@@ -122,14 +123,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
-<<<<<<< HEAD
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "/" #home page
 LOGOUT_REDIRECT_URL = "/" #home page
-=======
->>>>>>> ee68047e50b96ee0906e75d88cc00f9e1a972ddc
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

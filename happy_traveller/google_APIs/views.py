@@ -8,7 +8,7 @@ def api_data(request):
 
 
 
-    googlemaps.Client(key='AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI',
+    gmaps = googlemaps.Client(key='AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI',
      client_id=None,
      client_secret=None,
      timeout=None, connect_timeout=None, read_timeout=None, retry_timeout=60, requests_kwargs=None, queries_per_second=50, channel=None, retry_over_query_limit=True)

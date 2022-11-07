@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h3>Home page</h3>
+<h3>My account</h3>
 
 <div class="container">
 
@@ -22,20 +22,18 @@
       </tr>
       <tr>
         <td>Name</td>
-        <td>{{request.user.first_name|title}} {{request.user.last_name|title}}</td>      
+        <td>{{request.user.first_name}} {{request.user.last_name}}</td>      
       </tr>
-
-
-      {% if request.user.userprofile.has_profile %}
+      {% if request.user.profile.has_profile %}
 
         <tr>
           <td>Address</td>
           <td>
             <address>
-              {{request.user.userprofile.address}}<br>
-              {{request.user.userprofile.town}}<br>
-              {{request.user.userprofile.county}}<br>
-              {{request.user.userprofile.post_code}}<br>
+              {{request.user.profile.address}}<br>
+              {{request.user.profile.town}}<br>
+              {{request.user.profile.county}}<br>
+              {{request.user.profile.post_code}}<br>
             </address>
           </td>      
         </tr>
@@ -46,12 +44,10 @@
           <td><a href="{% url 'profile' %}" >Create user Profile</a></td>
         </tr>
       {% endif %}
+
+
     </tbody>
   </table>
 </div>
 {% endblock %}
 
-
-{% block footer %}
-
-{% endblock %}

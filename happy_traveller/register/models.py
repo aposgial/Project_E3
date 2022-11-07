@@ -19,6 +19,7 @@ class Profile(models.Model):
     
 	has_profile = models.BooleanField(default = False)
 	is_active = models.BooleanField(default = True)
+	
 
 	def __str__(self):
 		return self.address

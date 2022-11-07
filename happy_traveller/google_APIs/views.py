@@ -14,10 +14,10 @@ def api_data(request):
      timeout=None, connect_timeout=None, read_timeout=None, retry_timeout=60, requests_kwargs=None, queries_per_second=50, channel=None, retry_over_query_limit=True)
 
     # Geocoding an address
-    geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
+    geocode_result:list = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
 
     # Look up an address with reverse geocoding
-    reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
+    #reverse_geocode_result = gmaps.directions(alternatives=True,mode='driving', departure_time =50)
 
     # Request directions via public transit
     now = datetime.now()
@@ -25,11 +25,15 @@ def api_data(request):
                                         "Parramatta, NSW",
                                         mode="transit",
                                         departure_time=now)
+    #print(geocode_result)
+    data['geocode_rs'] = directions_result
+    data['directions_rs'] = directions_result
 
+    places_result = gmaps.places_neardy(location='33.8670522,151.1957362',radius =40000, open_now =False, type ='cafe')
 
-    data['geocode_rs'] = geocode_result
-    data['reverse_geocode_rs'] = reverse_geocode_result
-    data['directions_rs'] = directions_result 
+    my_place_id = places_result['result'][0]['place id']
+    print(my_place_id)
+    
     
 
 

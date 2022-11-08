@@ -4,6 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 def home(request):
     return render(request, 'WebApp_core/home.html')
+<<<<<<< HEAD
 
 def map(request):
     return render(request, 'WebApp_core/map.html')
@@ -15,3 +16,5 @@ def maptest(request):
 
 def login2(request):
     return render(request, 'WebApp_core/login2.html')
+=======
+>>>>>>> 10e0db77ebb15885d9e3a503474157580c26be9d

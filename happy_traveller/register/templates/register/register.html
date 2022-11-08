@@ -1,10 +1,46 @@
 {% extends 'WebApp_core/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Signup </button>
-    </form>
-{% endblock %}
+
+	{% block content %}
+	    <form method="POST">
+	        {% csrf_token %}
+	        {{ form|crispy }}
+	        <button type="submit">Signup </button>
+	    </form>
+	{% endblock %}
+
+
+
+{% comment %}
+	{% block content %}
+	        <center>
+	<div class="center">
+	    <h1>Register</h1>
+	    <form method="post">
+	      <div class="txt_field">
+	        <input type="text" required>
+	        <span></span>
+	        <label> Username</label>
+	      </div>
+	      <div class="txt_field">
+	        <input type="text" required>
+	        <span></span>
+	        <label> E-Mail Address</label>
+	      </div>
+	      <div class="txt_field">
+	        <input type="password" required>
+	        <span></span>
+	        <label> Password</label>
+	      </div>
+	      
+	      <input type="submit" value="Create Account">
+	      <div class="signup_link">
+	        Already have account? <a href="/login">Log In</a>
+	      </div>
+	    </form>
+	  </div>
+	</center>
+	
+	  {% endblock %}
+{% endcomment %}

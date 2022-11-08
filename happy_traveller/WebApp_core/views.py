@@ -11,5 +11,7 @@ def map(request):
 def maptest(request):
     return render(request, 'WebApp_core/maptest.html')
 
-def im(request):
-    return render(request, 'WebApp_core/im.html')
+
+
+def login2(request):
+    return render(request, 'WebApp_core/login2.html')

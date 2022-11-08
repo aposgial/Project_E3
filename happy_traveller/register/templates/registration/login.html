@@ -1,11 +1,86 @@
 {% extends 'WebApp_core/base.html' %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit">Signin</button>
-        <p>Don't have an account? Create one <a href="/register">here</a></p>
-    </form>
+{% comment %}
+	{% block content %}
+	    <form method="POST">
+	        {% csrf_token %}
+	        {{ form|crispy }}
+	        <button type="submit">Sign in</button>
+	        <p>Don't have an account? Create one <a href="/register">here</a></p>
+	    </form>
+	{% endblock %}
+{% endcomment %}
+
+
+
+
+    {% block content %}
+<div class="login-page">
+    <div class="form">
+
+
+      {% comment %}
+	<form class="register-form">
+	        <input type="text" placeholder="name"/>
+	        <input type="password" placeholder="password"/>
+	        <input type="text" placeholder="email address"/>
+	        <button>create</button>
+	        <p class="message">Already registered? <a href="#">Sign In</a></p>
+	      </form>
+{% endcomment %}
+
+
+      
+	{% comment %} douleuei 
+
+    
+	<form class="login-form">
+	        <center>
+	            <input type="text" placeholder="Username"/> 
+	            <p> </p>    
+	            <input type="password" placeholder="Password"/> 
+	            <p> </p>
+	            <button>login</button> 
+	            <p> </p>
+	            <p> </p>
+	            <p class="message">Not registered? <a href="/register">Create an account</a></p>
+	        </center>
+	      </form>
+	    </div>
+	  </div>
+	
+	</body>
+	</html>
+{% endcomment %}
+
+
+
+    <center>
+        <div class="center">
+          <h1>Login</h1>
+          <form method="post">
+            <div class="txt_field">
+              <input type="text" required>
+              <span></span>
+              <label> Username</label>
+            </div>
+            <div class="txt_field">
+              <input type="password" required>
+              <span></span>
+              <label> Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+              Not a member? <a href="/register">Register</a>
+            </div>
+          </form>
+        </div>
+    </center>
+
+            
+
 {% endblock %}
+
+

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3>User Profile</h3>
+
+<div class="container">
+    {% if request.user.profile.has_profile %}
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Address</td>
+                <td>
+                    <address>
+                        {{request.user.profile.address}}<br>
+                        {{request.user.profile.town}}<br>
+                        {{request.user.profile.county}}<br>
+                        {{request.user.profile.post_code}}<br>
+                    </address>
+                </td>      
+            </tr>
+        </tbody>
+    </table>
+    </br>
+    {% else %}
+    <label>Add Address</label>
+    <br><br>
+
+    <form id="profileform" method="POST" action="">
+        {% csrf_token %}
+
+        <label for="address">Address</label>
+        {{form.address}}
+        
+        <label for="town">Town/City</label>
+        {{form.town}}
+
+        <label for="county">County</label>
+        {{form.county}}
+
+        <label for="post_code">Postal Code</label>
+        {{form.post_code}}
+
+        <label for="country">Country</label>
+        {{form.country}}
+
+        <button type="submit" id="profile-btn">Update</button>
+    </form>
+
+    {% endif %}
+
+</div>
+
+
+<!--<script type="text/javascript">
+    var google_api_key = "{{google_api_key|safe}}";
+    var base_country = "{{base_country|safe}}";
+</script>
+
+<script src="{% static 'google_places.js' %}"></script>-->
+
+
+{% endblock %}

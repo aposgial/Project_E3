@@ -1,0 +1,7 @@
+{% if request.user.is_authenticated %}
+    <h1>user is authenticated nav bar</h1>
+
+{% else %}
+<h1>user is not authenticated nav bar</h1>
+
+{% endif %}

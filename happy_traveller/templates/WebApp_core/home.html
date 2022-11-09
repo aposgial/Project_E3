@@ -1,8 +1,165 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
-<h1>Home page</h1>
-<h5>hallo word!</h5>
-<h3>{{request.user.username}}</h3>
+{% comment %}
+	{% block content %}
+	<h1>Home page</h1>
+	<h5>hallo word!</h5>
+	<h3>{{request.user.username}}</h3>
+	{% endblock %}
+
+	{% endcomment %}
+
+	{% block content %}
+	<meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+  <br> </br>
+  <center>
+     
+  <div class="container"> 
+
+
+    
+        
+      
+
+  
+    
+    <div class="input-group mb-3">
+        <div class="input-group-append">
+        </div>
+      </div>
+      
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" text-align:center >
+        <br> </br>
+        
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"button-align: center >Search </button>
+        
+    
+    
+
+    </div>
+</center> 
+    
+
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>About Me</h2>
+      <h5>Photo of me:</h5>
+      <div class="fakeimg">Fake Image</div>
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+      <h3>Some Links</h3>
+      <p>Lorem ipsum dolor sit ame.</p>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Home Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/login">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/map">Map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8">
+      <h2>TITLE HEADING</h2>
+      <h5>Title description, Dec 7, 2017</h5>
+      <div class="fakeimg">Fake Image</div>
+      <p>Some text..</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <br>
+      <h2>TITLE HEADING</h2>
+      <h5>Title description, Sep 2, 2017</h5>
+      <div class="fakeimg">Fake Image</div>
+      <p>Some text..</p>
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Column 1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Column 3</h3>        
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+  </div>
+</div>
+
+
+
+{% comment %}
+	<div class="jumbotron text-center" style="margin-bottom:0">
+	    <button class="btn btn-outline-success my-2 my-sm-0" href="/map"  >Map </button>
+	</div>
+{% endcomment %}
+
+<div id="footer">
+    <div id="footer_content">
+        <div id="toggle_sitemap">Sitemap<span></span></div>
+        <div id="footer1">
+            <div class="module mod_custom"><div class="module_title"><h3>Επικοινωνία</h3></div><div class="module_body"><p>
+<img src="userfiles/images/icon_info_gray.png" />Τέρμα Μαγνησίας<br />
+<span>T.K. 62124, Σέρρες</span><br />
+<img src="userfiles/images/icon_phone_gray.png" /><strong>Τηλ.:</strong> (+30) 23210 49101<br />
+<span><strong>Fax:</strong> (+30) 23210 46556</span><br />
+<a href="index.php?cat_id=76"><img src="userfiles/images/icon_map_pin_gray.gif" />Χάρτες και Οδηγίες Πρόσβασης</a></p>
+<div class="clear"></div></div></div>				
+        </div>
+        <div id="footer2">
+            <div class="module mod_custom"><div class="module_title"><h3>Χρήσιμες Υπηρεσίες</h3></div><div class="module_body"><p>
+<a href="https://webmail.cm.ihu.gr/"><img src="userfiles/images/icon_email_gray.gif" />Ηλεκτρονικό Ταχυδρομείο</a><br />
+<a href="http://egram.teicm.gr/"><img src="userfiles/images/icon_egram_gray.gif" />Ηλεκτρονική Γραμματεία</a><br />
+<a href="http://elearning.teicm.gr/"><img src="userfiles/images/icon_elearning_gray.gif" />Πλατφόρμα Ηλεκτρονικής Μάθησης</a><br />
+<a href="http://lib.teicm.gr/"><img src="userfiles/images/icon_library_gray.gif" />Βιβλιοθήκη</a><br />
+<a href="http://noc.teicm.gr/"><img src="userfiles/images/icon_noc_gray.gif" />Κέντρο Διαχείρισης Δικτύου</a></p>
+<div class="clear"></div></div></div>				
+        </div>
+        <div id="footer3">
+            <div class="module mod_photos mosaic"><div class="module_title"><h3>Φωτογραφικό Άλμπουμ</h3></div><div class="module_body"><a href="userfiles/photogalleries/photos/tei_serrwn_1/tei_serrwn_39_83031.jpg" rel="gallery" title="ΤΕΙ Κεντρικής Μακεδονίας"><img src="userfiles/photogalleries/thumbnails/tei_serrwn_1/tei_serrwn_39_83031.jpg" alt="ΤΕΙ Κεντρικής Μακεδονίας" /></a><a href="userfiles/photogalleries/photos/tmhma_eadsa_5/tmhma_eadsa_2_12241.jpg" rel="gallery" title="Τμήμα ΕΑΔΣΑ"><img src="userfiles/photogalleries/thumbnails/tmhma_eadsa_5/tmhma_eadsa_2_12241.jpg" alt="Τμήμα ΕΑΔΣΑ" /></a><a href="userfiles/photogalleries/photos/tmhma_gewplhroforikhs_kai_topografias_4/tmhma_gewplhroforikhs_kai_topografias_2_25795.jpg" rel="gallery" title="Τμήμα Μηχανικών Τοπογραφίας & Γεωπληροφορικής Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_gewplhroforikhs_kai_topografias_4/tmhma_gewplhroforikhs_kai_topografias_2_25795.jpg" alt="Τμήμα Μηχανικών Τοπογραφίας & Γεωπληροφορικής Τ.Ε." /></a><a href="userfiles/photogalleries/photos/tei_serrwn_1/tei_serrwn_51_33063.jpg" rel="gallery" title="ΤΕΙ Κεντρικής Μακεδονίας"><img src="userfiles/photogalleries/thumbnails/tei_serrwn_1/tei_serrwn_51_33063.jpg" alt="ΤΕΙ Κεντρικής Μακεδονίας" /></a><a href="userfiles/photogalleries/photos/tmhma_mhxanologias_3/tmhma_mhxanologias_14_92490.jpg" rel="gallery" title="Τμήμα Μηχανολόγων Μηχανικών Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_mhxanologias_3/tmhma_mhxanologias_14_92490.jpg" alt="Τμήμα Μηχανολόγων Μηχανικών Τ.Ε." /></a><a href="userfiles/photogalleries/photos/tmhma_pde_2/tmhma_pde_1_14411.jpg" rel="gallery" title="Τμήμα Πολιτικών Μηχανικών Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_pde_2/tmhma_pde_1_14411.jpg" alt="Τμήμα Πολιτικών Μηχανικών Τ.Ε." /></a><div class="clear"></div></div></div>	
+        </div>
+    </div>
+    <div id="signature">
+        <div class="module mod_custom"><div class="module_body">Σχεδιασμός & Ανάπτυξη <a href="mailto:psavvas@teiser.gr">Σάββας Πασχαλίδης</a><div class="clear"></div></div></div>					
+    </div>
+</div>		
+</div>
+<div id="goto_top">
+<a href="#" title="Κορυφή σελίδας"><img src="images/theme/gotop.gif" alt="Κορυφή σελίδας"></a>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+</body>
+</html>
 {% endblock %}

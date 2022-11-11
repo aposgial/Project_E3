@@ -44,16 +44,20 @@ def api_data(request):
         data['places_namee'] = places_name
     except:
         data['places_namee'] = ''
-
-    places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
-    data['places_open_Hours'] = places_open_close
-
+    try:
+        places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
+        data['places_open_Hours'] = places_open_close
+    except:
+        data['places_open_Hours'] = None
     
     places_Address = gmaps.places(query = location_name )['results'][0]['formatted_address']
     data['places_addres'] = places_Address
 
-    places_rate = gmaps.places(query = location_name )['results'][0]['rating']
-    data['places_rating'] = places_rate
+    try:
+        places_rate = gmaps.places(query = location_name )['results'][0]['rating']
+        data['places_rating'] = places_rate
+    except:
+        data['places_rating'] = 0
 
     places_location_lat = gmaps.places(query = location_name )['results'][0]['geometry']['location']['lat']
     data['places_loclat'] = places_location_lat

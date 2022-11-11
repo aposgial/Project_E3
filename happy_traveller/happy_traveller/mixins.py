@@ -15,15 +15,13 @@ def FormErrors(*args):
 
 
 # reCAPTCHA validation
-def reCAPTCHAValidation(token):
-	result = requests.post(
-		'https://www.google.com/recaptcha/api/siteverify',
-		 data={
-		 	'secret': settings.RECAPTCHA_PRIVATE_KEY,
-			'response': token
-		 })
-
-	return result.json()
+def reCAPTCHAValidation(data):
+    data = {
+        'response': data['token'],
+        'secret': settings.RECAPTCHA_PRIVATE_KEY
+    }
+    resp = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data, )
+    return resp.json()
 
 
 # append url parameters when redirecting users

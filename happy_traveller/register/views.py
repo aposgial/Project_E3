@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from happy_traveller.mixins import reCAPTCHAValidation
 from django.conf import settings
-from django.http import JsonResponse
-from django.views.generic.base import TemplateView
-from django.utils.decorators import method_decorator
 from .forms import *
 
 
@@ -24,6 +22,7 @@ def prifile(request):
         profile = Profile.objects.get(user=request.user)
         profile.has_profile = True
         form = ProfileForm(data, instance=profile)
+
         if form.is_valid():
             profile.save()
             form.save()
@@ -40,15 +39,25 @@ def sign_up(request):
     if request.method == 'POST':
         data = request.POST
         form = SingupForm(data)
+        print(form.errors)
+
         if form.is_valid():
-            form.save()
-            user = authenticate(request, username=data['username'], password=data['password2'])
-            if user is not None:
-                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                return redirect(success_url)
+            result = reCAPTCHAValidation(data)
+
+            if result['success']:
+                form.save()
+                user = authenticate(request, username=data['username'], password=data['password2'])
+
+                if user is not None:
+                    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                    profile = Profile.objects.get(user=request.user)
+                    profile.captcha_score = result['score']
+                    profile.save()
+                    return redirect(success_url)
     else:
         form = SingupForm()
-    return render(request, template_name, {"form":form})
+    return render(request, template_name, {"form":form, "public_key":settings.RECAPTCHA_PUBLIC_KEY})
+
 
 
 def sign_in(request):
@@ -59,6 +68,7 @@ def sign_in(request):
         data = request.POST
         form = SigninForm(data)
         user = authenticate(request, username=data['username'], password=data['password'])
+
         if user is not None:
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             print(user)

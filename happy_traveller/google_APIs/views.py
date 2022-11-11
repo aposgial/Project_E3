@@ -39,9 +39,11 @@ def api_data(request):
              f.write(chunk)
     f.close()
 
-
-    places_name = gmaps.place(place_id=result['place_id'],fields=['name'])['result']['name']
-    data['places_namee'] = places_name
+    try:
+        places_name = gmaps.place(place_id=result['place_id'],fields=['name'])['result']['name']
+        data['places_namee'] = places_name
+    except:
+        data['places_namee'] = ''
 
     places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
     data['places_open_Hours'] = places_open_close

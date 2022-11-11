@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from happy_traveller.mixins import reCAPTCHAValidation
+from django.contrib.auth.models import User
 from django.conf import settings
 from .forms import *
 

@@ -25,7 +25,7 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'ΜΑΝΤΑΜ ΜΕΖΕΔΟΠΩΛΕΙΟ' 
+    location_name = 'Serres' 
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 
@@ -41,11 +41,17 @@ def api_data(request):
 
 
     places_name = gmaps.place(place_id=result['place_id'],fields=['name'])['result']['name']
-    data['places_nm'] = places_name
+    data['places_namee'] = places_name
+
+    places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
+    data['places_open_Hours'] = places_open_close
 
     
     places_Address = gmaps.places(query = location_name )['results'][0]['formatted_address']
-    data['places_adr'] = places_Address
+    data['places_addres'] = places_Address
+
+    places_rate = gmaps.places(query = location_name )['results'][0]['rating']
+    data['places_rating'] = places_rate
 
     places_location_lat = gmaps.places(query = location_name )['results'][0]['geometry']['location']['lat']
     data['places_loclat'] = places_location_lat

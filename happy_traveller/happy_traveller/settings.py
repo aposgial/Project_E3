@@ -38,13 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'snowpenguin.django.recaptcha3',
     'WebApp_core',
-    'register'
+    'register',
 ]
-#'crispy_forms',
-#    'WebApp_core.apps.WebappCoreConfig',
-#    'register.apps.RegisterConfig',
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

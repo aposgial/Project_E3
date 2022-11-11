@@ -91,7 +91,17 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-4">
+    {% for data in list %}
+
+      <div class="col-sm-4">
+        <h3>Column 1</h3>
+        <img src={{data.phto}}>
+        <p>{{ data.phone }}</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+      </div>
+
+    {% endfor %}
+    <!--<div class="col-sm-4">
       <h3>Column 1</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
@@ -105,54 +115,19 @@
       <h3>Column 3</h3>        
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
+    </div>-->
   </div>
 </div>
 
 
 
-{% comment %}
-	<div class="jumbotron text-center" style="margin-bottom:0">
-	    <button class="btn btn-outline-success my-2 my-sm-0" href="/map"  >Map </button>
-	</div>
-{% endcomment %}
+
 
 <div id="footer">
     <div id="footer_content">
         <div id="toggle_sitemap">Sitemap<span></span></div>
         <div id="footer1">
-            <div class="module mod_custom"><div class="module_title"><h3>Επικοινωνία</h3></div><div class="module_body"><p>
-<img src="userfiles/images/icon_info_gray.png" />Τέρμα Μαγνησίας<br />
-<span>T.K. 62124, Σέρρες</span><br />
-<img src="userfiles/images/icon_phone_gray.png" /><strong>Τηλ.:</strong> (+30) 23210 49101<br />
-<span><strong>Fax:</strong> (+30) 23210 46556</span><br />
-<a href="index.php?cat_id=76"><img src="userfiles/images/icon_map_pin_gray.gif" />Χάρτες και Οδηγίες Πρόσβασης</a></p>
-<div class="clear"></div></div></div>				
-        </div>
-        <div id="footer2">
-            <div class="module mod_custom"><div class="module_title"><h3>Χρήσιμες Υπηρεσίες</h3></div><div class="module_body"><p>
-<a href="https://webmail.cm.ihu.gr/"><img src="userfiles/images/icon_email_gray.gif" />Ηλεκτρονικό Ταχυδρομείο</a><br />
-<a href="http://egram.teicm.gr/"><img src="userfiles/images/icon_egram_gray.gif" />Ηλεκτρονική Γραμματεία</a><br />
-<a href="http://elearning.teicm.gr/"><img src="userfiles/images/icon_elearning_gray.gif" />Πλατφόρμα Ηλεκτρονικής Μάθησης</a><br />
-<a href="http://lib.teicm.gr/"><img src="userfiles/images/icon_library_gray.gif" />Βιβλιοθήκη</a><br />
-<a href="http://noc.teicm.gr/"><img src="userfiles/images/icon_noc_gray.gif" />Κέντρο Διαχείρισης Δικτύου</a></p>
-<div class="clear"></div></div></div>				
-        </div>
-        <div id="footer3">
-            <div class="module mod_photos mosaic"><div class="module_title"><h3>Φωτογραφικό Άλμπουμ</h3></div><div class="module_body"><a href="userfiles/photogalleries/photos/tei_serrwn_1/tei_serrwn_39_83031.jpg" rel="gallery" title="ΤΕΙ Κεντρικής Μακεδονίας"><img src="userfiles/photogalleries/thumbnails/tei_serrwn_1/tei_serrwn_39_83031.jpg" alt="ΤΕΙ Κεντρικής Μακεδονίας" /></a><a href="userfiles/photogalleries/photos/tmhma_eadsa_5/tmhma_eadsa_2_12241.jpg" rel="gallery" title="Τμήμα ΕΑΔΣΑ"><img src="userfiles/photogalleries/thumbnails/tmhma_eadsa_5/tmhma_eadsa_2_12241.jpg" alt="Τμήμα ΕΑΔΣΑ" /></a><a href="userfiles/photogalleries/photos/tmhma_gewplhroforikhs_kai_topografias_4/tmhma_gewplhroforikhs_kai_topografias_2_25795.jpg" rel="gallery" title="Τμήμα Μηχανικών Τοπογραφίας & Γεωπληροφορικής Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_gewplhroforikhs_kai_topografias_4/tmhma_gewplhroforikhs_kai_topografias_2_25795.jpg" alt="Τμήμα Μηχανικών Τοπογραφίας & Γεωπληροφορικής Τ.Ε." /></a><a href="userfiles/photogalleries/photos/tei_serrwn_1/tei_serrwn_51_33063.jpg" rel="gallery" title="ΤΕΙ Κεντρικής Μακεδονίας"><img src="userfiles/photogalleries/thumbnails/tei_serrwn_1/tei_serrwn_51_33063.jpg" alt="ΤΕΙ Κεντρικής Μακεδονίας" /></a><a href="userfiles/photogalleries/photos/tmhma_mhxanologias_3/tmhma_mhxanologias_14_92490.jpg" rel="gallery" title="Τμήμα Μηχανολόγων Μηχανικών Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_mhxanologias_3/tmhma_mhxanologias_14_92490.jpg" alt="Τμήμα Μηχανολόγων Μηχανικών Τ.Ε." /></a><a href="userfiles/photogalleries/photos/tmhma_pde_2/tmhma_pde_1_14411.jpg" rel="gallery" title="Τμήμα Πολιτικών Μηχανικών Τ.Ε."><img src="userfiles/photogalleries/thumbnails/tmhma_pde_2/tmhma_pde_1_14411.jpg" alt="Τμήμα Πολιτικών Μηχανικών Τ.Ε." /></a><div class="clear"></div></div></div>	
-        </div>
-    </div>
-    <div id="signature">
-        <div class="module mod_custom"><div class="module_body">Σχεδιασμός & Ανάπτυξη <a href="mailto:psavvas@teiser.gr">Σάββας Πασχαλίδης</a><div class="clear"></div></div></div>					
-    </div>
-</div>		
-</div>
-<div id="goto_top">
-<a href="#" title="Κορυφή σελίδας"><img src="images/theme/gotop.gif" alt="Κορυφή σελίδας"></a>
-</div>
-</body>
-</html>
-
+        </div>          
 
 
 

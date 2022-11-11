@@ -3,6 +3,7 @@
 
 {% block content %}
 
+<center>
 <h3>My account</h3>
 
 <div class="container">
@@ -29,8 +30,10 @@
         <tr>
           <td>Address</td>
           <td>
+            <br> </br>
+            
             <address>
-              {{request.user.profile.address}}<br>
+              {{request.user.profile.address}} <br>
               {{request.user.profile.town}}<br>
               {{request.user.profile.county}}<br>
               {{request.user.profile.post_code}}<br>
@@ -49,5 +52,6 @@
     </tbody>
   </table>
 </div>
+</center>
 {% endblock %}
 

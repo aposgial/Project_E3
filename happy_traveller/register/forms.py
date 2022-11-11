@@ -25,7 +25,7 @@ class SingupForm(UserCreationForm):
 	password2 = forms.CharField(min_length=4, required=True, widget=forms.PasswordInput(attrs={'placeholder': '*Confirm Password..','class':'password'}))
 
 	#reCAPTCHA token
-	token = forms.CharField(widget=forms.TextInput())
+	token = forms.CharField(required=False,widget=forms.HiddenInput(attrs={'class':'g-recaptcha-response','id':'recaptcha'}))
 
 	class Meta:
 		model = User

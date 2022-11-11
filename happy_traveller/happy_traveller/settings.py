@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
+    'snowpenguin.django.recaptcha3',
     'WebApp_core',
     'register'
 ]
@@ -143,5 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RECAPTCHA_PRIVATE_KEY = "6Le5p-AiAAAAALxTvL3m0_8oiqitkYxBNeSLNq-Y"
 RECAPTCHA_PUBLIC_KEY = "6Le5p-AiAAAAAPdjK2MAPyKYAVRx2w7t-iQB01q-"
+RECAPTCHA_REQUIRED_SCORE = 0.5
 
 GOOGLE_API_KEY = ""

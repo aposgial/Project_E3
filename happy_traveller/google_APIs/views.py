@@ -25,7 +25,7 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'Λίμνη Κερκίνη' 
+    location_name = 'Serres' 
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 
@@ -39,29 +39,34 @@ def api_data(request):
              f.write(chunk)
     f.close()
 
-
-    places_name = gmaps.place(place_id=result['place_id'],fields=['name'])['result']['name']
-    data['places_nm'] = places_name
-
+    try:
+        places_name = gmaps.place(place_id=result['place_id'],fields=['name'])['result']['name']
+        data['places_namee'] = places_name
+    except:
+        data['places_namee'] = ''
+    try:
+        places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
+        data['places_open_Hours'] = places_open_close
+    except:
+        data['places_open_Hours'] = None
     
     places_Address = gmaps.places(query = location_name )['results'][0]['formatted_address']
-    data['places_adr'] = places_Address
+    data['places_addres'] = places_Address
+
+    try:
+        places_rate = gmaps.places(query = location_name )['results'][0]['rating']
+        data['places_rating'] = places_rate
+    except:
+        data['places_rating'] = 0
 
     places_location_lat = gmaps.places(query = location_name )['results'][0]['geometry']['location']['lat']
     data['places_loclat'] = places_location_lat
     places_location_lng = gmaps.places(query = location_name )['results'][0]['geometry']['location']['lng']
     data['places_loclng'] = places_location_lng
 
-    places_reference = gmaps.places(query = location_name )['results'][0]['photos'][0]['html_attributions'][0]
-    data['places_ref'] = places_reference
-    import requests
-    #myToken = '<token>'
-    #myUrl = '<website>'
-    #head = {'Authorization': 'token {}'.format(myToken)}
-    #response = requests.get(myUrl, headers=head)
-
     places_info = gmaps.places(query = location_name )
     data['places_inf'] = places_info
+   
    
     
  

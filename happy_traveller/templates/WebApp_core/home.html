@@ -29,15 +29,17 @@
 	<img src="{% static 'photos/photo8.jpg' %}" >
 {% endcomment %}
 
-    {% if search_resualt %}
+    {% if search %}
     <center> <h3>Photo Album</h3> </center>
     <div class="container">
       <div class="container">
         <center>
-        <p> Onoma axio8eat </p>
-        <p> dieu8unsi </p>
-        <p> syntetag1 </p>
-        <p> syntetag2 </p>
+        <p> {{result.name}} </p>
+        <p> {{result.address}} </p>
+        <p> {{result.loclat}} </p>
+        <p> {{result.loclng}} </p>
+        <p> {{result.open_now}} </p>
+        <p> {{result.rating}} </p>
         <div class="row">
         </center>
 

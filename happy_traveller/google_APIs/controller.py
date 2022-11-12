@@ -38,4 +38,6 @@ class API_Controller():
                 "loclng": result['results'][0]['geometry']['location']['lng']
             }
         except:
-            return {}
+            return {
+                "name": self.get_place_info()
+            }

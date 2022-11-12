@@ -2,26 +2,28 @@
 {% load static %}
 
 {% block content %}
-
+<center>
 <h3>Sign In</h3>
 
 <div class="container">
 
     <form id="signinform" method="POST" action="">
         {% csrf_token %}
+        
         <label for="username">Username</label>
         {{form.username}}
-
+        <br>
         <label for="password">Password</label>
         {{form.password}}
+        </br>
 
         <label class="check-container">Show Passwords
             <input type="checkbox" onclick="showPword()">
             <span class="checkmark"></span>
         </label>
-
+            <br></br>
         <button type="submit">Sign in</button>
     </form>
-
+</center>
 </div>
 {% endblock %}

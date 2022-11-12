@@ -28,8 +28,8 @@ class SingupForm(UserCreationForm):
 # from built-in AuthenticationForm handles user authentication
 class SigninForm(AuthenticationForm):
 
-	username = forms.CharField(max_length=254, required=True, widget=forms.TextInput(attrs={'placeholder': '*Username..'}))
-	password = forms.CharField(min_length=4, required=True, widget=forms.PasswordInput(attrs={'placeholder': '*Password..','class':'password'}))
+	username = forms.CharField(max_length=254, required=True, widget=forms.TextInput(attrs={'placeholder': '*Username'}))
+	password = forms.CharField(min_length=4, required=True, widget=forms.PasswordInput(attrs={'placeholder': '*Password','class':'password'}))
 
 	class Meta:
 		model = User

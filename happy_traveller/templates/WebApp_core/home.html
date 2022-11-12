@@ -1,8 +1,138 @@
 {% extends 'base.html' %}
+{% load static %}
+	{% block content %}
+	
+
+  {% if request.user.is_authenticated %}
+  
+  <p> me syndesi </p>
+  <center>
+     
+  {% comment %}
+	<div class="container"> 
+	    <div class="input-group mb-3">
+	        <div class="input-group-append">
+	        </div>
+{% endcomment %}
+          <form method="get">
+
+              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search" / text-align:center >
+              <br> </br>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit" button-align: center >Search </button>
+          </form>
+</center> 
 
 
-{% block content %}
-<h1>Home page</h1>
-<h5>hallo word!</h5>
-<h3>{{request.user.username}}</h3>
+
+         
+{% comment %}
+	<img src="{% static 'photos/photo8.jpg' %}" >
+{% endcomment %}
+
+    {% if search_resualt %}
+    <center> <h3>Photo Album</h3> </center>
+    <div class="container">
+      <div class="container">
+        <center>
+        <p> Onoma axio8eat </p>
+        <p> dieu8unsi </p>
+        <p> syntetag1 </p>
+        <p> syntetag2 </p>
+        <div class="row">
+        </center>
+
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo0.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div> 
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo1.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+            <p>fwto prwti</p>
+          </div>
+    
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo2.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+            <p>fwto 2</p>
+          </div>
+          
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo3.jpg' %}" width="200" height="200" class="img-thumbnail" >  
+            <p>dokimi3</p>
+          </div>
+
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo4.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+          
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo5.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+          
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo6.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo7.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo8.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+
+          <div class="col-sm-4">
+            <img src="{% static 'photos/photo9.jpg' %}" width="200" height="200" class="img-thumbnail" > 
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+      
+      
+    
+    
+    {% endif %}
+    
+
+
+    
+    
+
+
+    
+
+
+      
+
+        
+    
+    
+    
+    </div>
+      </div>
+
+
+
+{% else %}
+
+       <center>
+    <p> xwris syndesi </p>
+     <div class="container"> 
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+                </div>
+            </div>
+            
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" / text-align:center >  
+    
+                <br> </br>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"button-align: center >Search </button>
+            </div>
+        </center> 
+
+        {% endif %}
+
 {% endblock %}
+
+
+      

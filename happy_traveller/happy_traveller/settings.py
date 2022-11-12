@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'WebApp_core',
     'register',
+    'google_APIs',
 ]
 
 MIDDLEWARE = [
@@ -121,17 +122,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-#LOGIN_URL = "/" #signin page
-#LOGIN_REDIRECT_URL = "/" #profile page
-#LOGOUT_REDIRECT_URL = "/" #home page
+LOGIN_REDIRECT_URL = "/" #home page
+LOGOUT_REDIRECT_URL = "/" #home page
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -140,6 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RECAPTCHA_PRIVATE_KEY = "6Le5p-AiAAAAALxTvL3m0_8oiqitkYxBNeSLNq-Y"
 RECAPTCHA_PUBLIC_KEY = "6Le5p-AiAAAAAPdjK2MAPyKYAVRx2w7t-iQB01q-"
-RECAPTCHA_REQUIRED_SCORE = 0.5
+RECAPTCHA_REQUIRED_SCORE = 0.1
 
 GOOGLE_API_KEY = ""

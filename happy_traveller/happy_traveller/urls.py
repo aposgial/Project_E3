@@ -18,12 +18,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from register import views as register_views
+from google_APIs import views as google_APIs_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('WebApp_core.urls')),
     path('', include('register.urls')),
-]    #path('register/', register_views.register, name='register'),
+    path('data/', google_APIs_views.api_data,name='data'),
+    ]   #path('register/', register_views.register, name='register'),
     #path('', include('django.contrib.auth.urls')),
 
 if settings.DEBUG:

@@ -32,7 +32,7 @@ def api_data(request):
     photos:list = gmaps.place(place_id=result['place_id'], fields=['photo'])['result']['photos']
    
     for index, photo in enumerate(photos):
-        finall_photo = gmaps.places_photo(photo_reference=photo['photo_reference'], max_width=400, max_height=400)
+        finall_photo = gmaps.places_photo(photo_reference=photo['photo_reference'], max_width=40, max_height=40)
         f = open('static/photos/photo{}.jpg'.format(index), 'wb')
         for chunk in finall_photo:
             if chunk:

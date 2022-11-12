@@ -25,7 +25,7 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'ΜΑΝΤΑΜ ΜΕΖΕΔΟΠΩΛΕΙΟ' 
+    location_name = 'Λίμνη Κερκίνη' 
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 
@@ -51,6 +51,14 @@ def api_data(request):
     data['places_loclat'] = places_location_lat
     places_location_lng = gmaps.places(query = location_name )['results'][0]['geometry']['location']['lng']
     data['places_loclng'] = places_location_lng
+
+    places_reference = gmaps.places(query = location_name )['results'][0]['photos'][0]['html_attributions'][0]
+    data['places_ref'] = places_reference
+    import requests
+    #myToken = '<token>'
+    #myUrl = '<website>'
+    #head = {'Authorization': 'token {}'.format(myToken)}
+    #response = requests.get(myUrl, headers=head)
 
     places_info = gmaps.places(query = location_name )
     data['places_inf'] = places_info

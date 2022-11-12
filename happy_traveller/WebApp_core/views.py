@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from google_APIs.views import get_photos
+from google_APIs.controller import API_Controller
 
 # Create your views here.
 def home(request):
@@ -7,8 +7,11 @@ def home(request):
         search = request.GET.get('search')
         print(search)
         if search:
-            get_photos(location_name=search)
-            context = {"search_resualt":True}
+            api = API_Controller(search_location=search)
+            context = {
+                "search":True,
+                "result": api.get_place_info
+                }
         else:
             context = {"search_resualt":False}
         

@@ -22,15 +22,20 @@
           <td>{{request.user.username}}</td>
       </tr>
       <tr>
-        <td>Name</td>
-        <td>{{request.user.first_name}} {{request.user.last_name}}</td>      
+        <td>First Name:</td>
+        <td>{{request.user.first_name}} </td>      
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td>{{request.user.last_name}}</td>      
       </tr>
       {% if request.user.profile.has_profile %}
 
         <tr>
           <td>Address</td>
+          
           <td>
-            <br> </br>
+
             
             <address>
               {{request.user.profile.address}} <br>

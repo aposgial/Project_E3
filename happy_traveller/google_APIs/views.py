@@ -25,7 +25,7 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'Serres' 
+    location_name = 'Komotini' 
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 

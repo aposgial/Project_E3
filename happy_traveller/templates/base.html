@@ -33,32 +33,18 @@
 
 <body>
 
-    
+  
     {% include 'partials/nav_bar.html' %}
+    
     {% block content %}
-    {% comment %}
-	<div id="content" name="content">
-{% endcomment %}
-        
-        
-        
-       
-    
-              <div class="jumbotron text-center" style="margin-bottom:0">
-                <h1>Happy Traveller</h1>
-                <p>Δοκιμή</p> 
-              </div>
-              
-            
     
               
-        </div>
+             
         {% endblock%}
-    {% comment %}
-	</div>
-{% endcomment %}
+    
 
     {% block footer %}
+
     {% endblock %}
 
     <script src="{% static 'main.js' %}"></script>

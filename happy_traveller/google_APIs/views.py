@@ -33,7 +33,7 @@ def api_data(request):
    
     for index, photo in enumerate(photos):
         finall_photo = gmaps.places_photo(photo_reference=photo['photo_reference'], max_width=400, max_height=400)
-        f = open('google_APIs/photos/photo{}.jpg'.format(index), 'wb')
+        f = open('static/photos/photo{}.jpg'.format(index), 'wb')
         for chunk in finall_photo:
             if chunk:
              f.write(chunk)
@@ -74,3 +74,17 @@ def api_data(request):
     return render(request, 'google_APIs/data.html', context=data)
 
     
+def get_photos(location_name:str):
+    gmaps = googlemaps.Client(key='AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI')
+    
+    result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
+
+    photos:list = gmaps.place(place_id=result['place_id'], fields=['photo'])['result']['photos']
+   
+    for index, photo in enumerate(photos):
+        finall_photo = gmaps.places_photo(photo_reference=photo['photo_reference'], max_width=400, max_height=400)
+        f = open('static/photos/photo{}.jpg'.format(index), 'wb')
+        for chunk in finall_photo:
+            if chunk:
+             f.write(chunk)
+    f.close()

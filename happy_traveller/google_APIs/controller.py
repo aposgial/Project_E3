@@ -29,6 +29,7 @@ class API_Controller():
     def get_place_info(self):
         try:
             result = self.client.places(query=self.search_location )
+            print(result)
             return {
                 "name": self._get_place_name(),
                 "open_now": result['results'][0]['opening_hours']['open_now'],

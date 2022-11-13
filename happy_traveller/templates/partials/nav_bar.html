@@ -1,88 +1,52 @@
+{% load static %}
+
 {% if request.user.is_authenticated %}
-    
-
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        
-      
-      
-      <div class="navbar-nav-scroll">
-        <ul class="navbar-nav bd-navbar-nav flex-row">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="/">
+          <img src="{% static 'icons/globe.png' %}" width="30" height="24">
+          Happy Traveller
+        </a>
+        <ul class="navbar-nav es-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/" > Home <a </a>
+            <a class="nav-link" href="/account">Account</a>
           </li>
-                  
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hi {{ request.user.username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/signout">Signout</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
-      
-        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           Hi {{ request.user.username }} 
-             {% comment %}
-	{{ request.user.profile.post_code }}
-{% endcomment %}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-              <a class="dropdown-item" >{{ request.user.first_name }} {{ request.user.last_name }} </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/account">My Account</a>
-              <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="/#">Wishlist</a>
-              <a class="dropdown-item" href="/signout">Log out</a>
-            </div>
-          </li>
-      
-          
-          
-        </ul>
-        
-      
-        
-    </nav>
+    </div>
+  </nav>
 
 {% else %}
-
-
-
-
-  
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    
-    <div class="navbar-nav-scroll">
-      <ul class="navbar-nav bd-navbar-nav flex-row">
-        <li class="nav-item">
-          <a class="nav-link" href="/" > Home <a </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " href="/signin" >Log In</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="/">
+          <img src="photo0.jpg" width="30" height="24">
+          Happy Traveller
+        </a>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/signin">Sign-in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/signup" > Register</a>
+            <a class="nav-link" href="/signup">Sign-up</a>
           </li>
-    
-          
-        
-      </ul>
+        </ul>
+      </div>
     </div>
-
-
-
-  
-    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex" >
-      <li class="nav-item dropdown">
-        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Not connected
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/signin" >Log In</a>
-          <a class="dropdown-item" href="/signup" > Register</a>
-          
-        </div>
-      </li>
-    </ul>
-</nav>
-
-  {% endif %}
+  </nav>
+{% endif %}

@@ -1,72 +1,67 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
-
-<center>
-<h3>User Profile</h3>
-
-<div class="container">
     {% if request.user.profile.has_profile %}
-    <table>
-        <thead>
-            <tr>
-                <th>Field</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Address</td>
-                <td>
-                    <address>
-                        {{request.user.profile.address}}<br>
-                        {{request.user.profile.town}}<br>
-                        {{request.user.profile.county}}<br>
-                        {{request.user.profile.post_code}}<br>
-                        {{request.user.profile.captcha_score}}<br>
-                    </address>
-                </td>      
-            </tr>
-        </tbody>
-    </table>
-    </br>
+        <div class="container">
+            <br>
+            <h3>Profile details</h3>
+            <br>
+
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Address:</li>
+            <li class="list-group-item">{{request.user.profile.address}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Town:</li>
+            <li class="list-group-item">{{request.user.profile.town}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">County:</li>
+            <li class="list-group-item">{{request.user.profile.county}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Post code:</li>
+            <li class="list-group-item">{{request.user.profile.post_code}}</li>
+            </ul>
+        </div>
     {% else %}
-    <label>Add Address</label>
-    <br><br>
+        <center>
+            <br>
+            <h3>Profile</h3>
+            <br><br>
 
-    <form id="profileform" method="POST" action="">
-        {% csrf_token %}
+            <div class="container">
+                <form id="profileform" method="POST" action="">
+                    {% csrf_token %}
 
-        <label for="address">Address</label>
-        {{form.address}}
-        
-        <label for="town">Town/City</label>
-        {{form.town}}
+                    <div class="mb-3 w-25">
+                        <label for="address" class="form-label">Address</label>
+                        {{form.address}}
+                    </div>
 
-        <label for="county">County</label>
-        {{form.county}}
+                    <div class="mb-3 w-25">
+                        <label for="town" class="form-label">Town</label>
+                        {{form.town}}
+                    </div>
 
-        <label for="post_code">Postal Code</label>
-        {{form.post_code}}
+                    <div class="mb-3 w-25">
+                        <label for="county" class="form-label">County</label>
+                        {{form.county}}
+                    </div>
 
-        <label for="country">Country</label>
-        {{form.country}}
+                    <div class="mb-3 w-25">
+                        <label for="post_code" class="form-label">Post code</label>
+                        {{form.post_code}}
+                    </div>
 
-        <button type="submit" id="profile-btn">Update</button>
-    </form>
+                    <div class="mb-3 w-25">
+                        <label for="country" class="form-label">Country</label>
+                        {{form.country}}
+                    </div>
 
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+            </div>
+        </center>
     {% endif %}
-
-</div>
-
-
-<!--<script type="text/javascript">
-    var google_api_key = "{{google_api_key|safe}}";
-    var base_country = "{{base_country|safe}}";
-</script>
-
-<script src="{% static 'google_places.js' %}"></script>-->
-
-</center>
 {% endblock %}

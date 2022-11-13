@@ -1,62 +1,58 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
 
-<center>
-<h3>My account</h3>
+    <div class="container">
+      <br>
+      <h3>My account</h3>
+      <h4>Account details</h4>
+      <br>
+      
+      <ul class="list-group list-group-horizontal list-group-center">
+        <li class="list-group-item">First Name:</li>
+        <li class="list-group-item">{{request.user.first_name}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">Last Name:</li>
+        <li class="list-group-item">{{request.user.last_name}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">Username:</li>
+        <li class="list-group-item">{{request.user.username}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">Email:</li>
+        <li class="list-group-item">{{request.user.email}}</li>
+      </ul>
 
-<div class="container">
-
-  <h4>User account details</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Field</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Username</td>
-          <td>{{request.user.username}}</td>
-      </tr>
-      <tr>
-        <td>First Name:</td>
-        <td>{{request.user.first_name}} </td>      
-      </tr>
-      <tr>
-        <td>Last Name:</td>
-        <td>{{request.user.last_name}}</td>      
-      </tr>
       {% if request.user.profile.has_profile %}
+        <br>
+        <h4>Profile details</h4>
+        <br>
 
-        <tr>
-          <td>Address</td>
-          
-          <td>
-
-            
-            <address>
-              {{request.user.profile.address}} <br>
-              {{request.user.profile.town}}<br>
-              {{request.user.profile.county}}<br>
-              {{request.user.profile.post_code}}<br>
-            </address>
-          </td>      
-        </tr>
-
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">Address:</li>
+          <li class="list-group-item">{{request.user.profile.address}}</li>
+        </ul>
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">Town:</li>
+          <li class="list-group-item">{{request.user.profile.town}}</li>
+        </ul>
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">County:</li>
+          <li class="list-group-item">{{request.user.profile.county}}</li>
+        </ul>
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item">Post code:</li>
+          <li class="list-group-item">{{request.user.profile.post_code}}</li>
+        </ul>
       {% else %}
-        <tr>
-          <td>User Profile</td>
-          <td><a href="{% url 'profile' %}" >Create user Profile</a></td>
-        </tr>
+        <br>
+        <p>You don't have profile. Create one below.</p>
+        <a class="btn btn-primary" href="{% url 'profile' %}" role="button">Create profile</a>
       {% endif %}
 
+    </div>
 
-    </tbody>
-  </table>
-</div>
-</center>
 {% endblock %}
 

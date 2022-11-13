@@ -25,12 +25,25 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'Serres' 
+    location_name = 'Λίμνη Κερκίνη' 
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 
     photos:list = gmaps.place(place_id=result['place_id'], fields=['photo'])['result']['photos']
-   
+
+    place_reviews:list = gmaps.place(place_id=result['place_id'], fields=['review'])['result']
+    data['disc']=place_reviews
+
+
+    try:
+        place_openHours:list = gmaps.place(place_id=result['place_id'], fields=['opening_hours'])['result']['opening_hours']['weekday_text']
+        for days in place_openHours :
+             data['place_webst'] = place_openHours
+    except:
+        data['place_webst']=None
+
+    place_openHours = gmaps.place(place_id=result['place_id'], fields=['opening_hours'])
+
     for index, photo in enumerate(photos):
         finall_photo = gmaps.places_photo(photo_reference=photo['photo_reference'], max_width=400, max_height=400)
         f = open('google_APIs/photos/photo{}.jpg'.format(index), 'wb')

@@ -25,7 +25,8 @@ def api_data(request):
     
     data['geocode_rs'] = directions_result
 
-    location_name = 'Λίμνη Κερκίνη' 
+    location_name = 'fidel' 
+   
 
     result = gmaps.find_place(input= location_name, input_type='textquery')['candidates'][0]
 
@@ -33,7 +34,6 @@ def api_data(request):
 
     place_reviews:list = gmaps.place(place_id=result['place_id'], fields=['review'])['result']
     data['disc']=place_reviews
-
 
     try:
         place_openHours:list = gmaps.place(place_id=result['place_id'], fields=['opening_hours'])['result']['opening_hours']['weekday_text']

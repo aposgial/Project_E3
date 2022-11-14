@@ -1,56 +1,85 @@
 {% extends 'base.html' %}
-{% load static %}
-
 
 {% block extend_head %}
-    <!--<script src='https://www.google.com/recaptcha/api.js?render={{recaptcha_site_key}}'></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render={{ public_key }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            $('#signupform').submit(function(e){
+                var form = this;
+                e.preventDefault()
+                grecaptcha.execute('{{ public_key }}', {action: '/'}).then(function(token) {
+                    $('#recaptcha').val(token)
+                    form.submit()
+                });
+            })
+        });
+    </script>
+
 {% endblock %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+        <center>
+            <br>
+            <h3>You already are signed-up</h3>
+        </center>
+    {% else %}
+        <center>
+            <h3>Sign Up</h3>
 
-<h3>Sign Up</h3>
+            <div class="container">
+                <form id="signupform" method="POST" action="">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3 w-25">
+                        <label for="first_name" class="form-label">First name</label>
+                        {{form.first_name}}
+                    </div>
+                    
+                    <div class="mb-3 w-25">
+                        <label for="last_name" class="form-label">Last name</label>
+                        {{form.last_name}}
+                    </div>
+                    
+                    <div class="mb-3 w-25">
+                        <label for="username" class="form-label">Username</label>
+                        {{form.username}}
+                    </div>
 
-<div class="container">
+                    <div class="mb-3 w-25">
+                        <label for="email" class="form-label">Email</label>
+                        {{form.email}}
+                    </div>
 
-    <form id="signupform" method="POST" action="">
-        {% csrf_token %}
+                    <div class="mb-3 w-25">
+                        <label for="password1" class="form-label">Password</label>
+                        {{form.password1}}
+                    </div>
 
-        <label for="first_name">First Name</label>
-        {{form.first_name}}
+                    <div class="mb-3 w-25">
+                        <label for="password2" class="form-label">Confirm password</label>
+                        {{form.password2}}
+                        <div id="passwordHelpBlock" class="form-text">
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                        </div>
+                    </div>
 
-        <label for="last_name">Last Name</label>
-        {{form.last_name}}
+                    {{form.token}}
 
-        <label for="username">Username</label>
-        {{form.username}}
+                    <div class="mb-3 form-check">
+                        <label class="check-container form-check-label">Show Passwords
+                            <input type="checkbox" class="form-check-input" onclick="showPword()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
 
-        <label for="email">Email</label>
-        {{form.email}}
-
-        <label for="password1">Password</label>
-        {{form.password1}}
-
-        <label for="password2">Confirm Password</label>
-        {{form.password2}}
-
-        {{form.token}}
-
-        <label class="check-container">Show Passwords
-            <input type="checkbox" onclick="showPword()">
-            <span class="checkmark"></span>
-        </label>
-
-        <button type="submit">Sign up</button>
-    </form>
-    
-</div>
-
-
-
-<script type="text/javascript">
-    // Create a variable that can be used in main.js
-    //var recaptcha_site_key = '{{recaptcha_site_key|safe}}'
-</script>
-
-
+                    <button type="submit" class="btn btn-primary">Sign up</button>
+                </form>
+            </div>
+        </center>
+    {% endif%}
 {% endblock %}

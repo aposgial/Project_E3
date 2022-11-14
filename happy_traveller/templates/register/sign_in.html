@@ -1,27 +1,44 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
+        <center>
+            <br>
+            <h3>You already are signed-in</h3>
+        </center>
+    {% else %}
+        <center>
+            <br>
+            <h3>Sign-In</h3>
+            <br>
 
-<h3>Sign In</h3>
+            <div class="container">
+                <form id="signinform" method="POST" action="">
+                    {% csrf_token %}
 
-<div class="container">
+                    <div class="mb-3 w-25">
+                        <label for="username" class="form-label">Username</label>
+                        {{form.username}}
+                    </div>
 
-    <form id="signinform" method="POST" action="">
-        {% csrf_token %}
-        <label for="username">Username</label>
-        {{form.username}}
+                    <div class="mb-3 w-25">
+                        <label for="password" class="form-label">Password</label>
+                        {{form.password}}
+                        <div id="passwordHelpBlock" class="form-text">
+                            Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                        </div>
+                    </div>
 
-        <label for="password">Password</label>
-        {{form.password}}
+                    <div class="mb-3 form-check">
+                        <label class="check-container form-check-label">Show Passwords
+                            <input type="checkbox" class="form-check-input" onclick="showPword()">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
 
-        <label class="check-container">Show Passwords
-            <input type="checkbox" onclick="showPword()">
-            <span class="checkmark"></span>
-        </label>
-
-        <button type="submit">Sign in</button>
-    </form>
-
-</div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
+        </center>
+    {% endif %}
 {% endblock %}

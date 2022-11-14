@@ -8,13 +8,21 @@ def home(request):
         option = request.GET.get('flexRadioDefault')
         print(option)
         print(search)
-        if search:
-            #api = API_Controller(search_location=search)
-            #api.get_photos()
+        if search and option:
+            api = API_Controller(search_location=search)
+            infos = api.get_places_info()
+            results = []
+
+            for info in infos:
+                if info['category'] == 'city' and option == 'city':
+                    results.append(info)
+
+                elif info['category'] == 'place' and option == 'place':
+                    results.append(info)
+                    
             context = {
                 "search":True,
-                #"result": api.get_place_info()
-                }
+                "results":results}
         else:
             context = {"search":False}
         

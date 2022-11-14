@@ -41,39 +41,41 @@ class API_Controller():
             return []
 
     
-    def get_places_info(self, option:str):
+    def get_places_info(self):
         data = []
         results:list = self.client.places(query=self.search_location)['results']
         try:
-            if option == 'place':
-                for result in results:
-                    if result['name']:
-                        name = result['name']
+            for result in results:
+                if result['name']:
+                    name = result['name']
 
-                    if 'opening_hours' in result:
-                        open_now = result['opening_hours']['open_now']
-                    else:
-                        open_now = None
+                if 'opening_hours' in result:
+                    open_now = result['opening_hours']['open_now']
+                else:
+                    open_now = None
 
-                    if 'formatted_address' in result:
-                        formatted_address = result['formatted_address']
+                if 'formatted_address' in result:
+                    formatted_address = result['formatted_address']
 
-                    if 'rating' in result:
-                        rating = result['rating']
-                    else:
-                        rating = None
+                if 'rating' in result:
+                    rating = result['rating']
+                    category = 'place'
+                else:
+                    category = 'city'
 
-                    if 'geometry' in result:
-                        lat = result['geometry']['location']['lat']
-                        lng = result['geometry']['location']['lng']
+                if 'geometry' in result:
+                    lat = result['geometry']['location']['lat']
+                    lng = result['geometry']['location']['lng']
 
-                    if 'place_id' in result:
-                        place_id = result['place_id']
+                if 'place_id' in result:
+                    place_id = result['place_id']
 
-                    if 'photos' in result:
-                        photo_name = self.get_photo(result['photos'][0]['photo_reference'])
+                if 'photos' in result:
+                    photo_name = self.get_photo(result['photos'][0]['photo_reference'])
 
+                if category == 'place':
                     data.append({
+                        "category":category,
                         "name": name,
                         "open_now":open_now,
                         "formatted_address":formatted_address,
@@ -83,25 +85,9 @@ class API_Controller():
                         "place_id":place_id,
                         "photo_name":photo_name
                     })
-                return data
-            elif option == 'city':
-                for result in results:
-                    if result['name']:
-                        name = result['name']
-
-                    if 'formatted_address' in result:
-                        formatted_address = result['formatted_address']
-
-                    if 'geometry' in result:
-                        lat = result['geometry']['location']['lat']
-                        lng = result['geometry']['location']['lng']
-
-                    if 'place_id' in result:
-                        place_id = result['place_id']
-
-                    if 'photos' in result:
-                        photo_name = self.get_photo(result['photos'][0]['photo_reference'])
+                elif category == 'city':
                     data.append({
+                        "category":category,
                         "name": name,
                         "formatted_address":formatted_address,
                         "loclat":lat,
@@ -109,7 +95,7 @@ class API_Controller():
                         "place_id":place_id,
                         "photo_name":photo_name
                     })
-                return data
+            return data
         except Exception as e:
             print(e)
             return []

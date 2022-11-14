@@ -6,8 +6,7 @@ def home(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         option = request.GET.get('flexRadioDefault')
-        print(option)
-        print(search)
+
         if search and option:
             api = API_Controller(search_location=search)
             infos = api.get_places_info()
@@ -23,7 +22,6 @@ def home(request):
             context = {
                 "search":True,
                 "results":results}
-            print(context)
         else:
             context = {"search":False}
         

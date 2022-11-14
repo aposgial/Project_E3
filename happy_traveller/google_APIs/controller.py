@@ -13,7 +13,6 @@ class API_Controller():
             photo_name = 'photo{}.jpg'.format(str(random.randint(0,1000)))
 
             finall_photo = self.client.places_photo(photo_reference=photo_reference, max_width=400, max_height=400)
-            print('ok..')
             with open('static/photos/{}'.format(photo_name), 'wb') as f:
                 for chunk in finall_photo:
                     if chunk:
@@ -74,7 +73,6 @@ class API_Controller():
                     place_id = result['place_id']
 
                 if 'photos' in result:
-                    print('ref ok..')
                     photo_name = self.get_photo(str(result['photos'][0]['photo_reference']))
 
                 if category == 'place':

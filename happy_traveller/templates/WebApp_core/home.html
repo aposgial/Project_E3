@@ -32,7 +32,26 @@
 
 {% if search %}
   <center> <h3>Photo Album</h3> </center>
-    <div class="container">
+  <br>
+
+  {% for result in results %}
+    <center>
+      <p> {{result.name}} </p>
+      <p> {{result.formatted_address}} </p>
+      <p> {{result.loclat}} </p>
+      <p> {{result.loclng}} </p>
+      <p> {{result.open_now}} </p>
+      <p> {{result.rating}} </p>
+
+      {% with 'photos/'|add:result.photo_name as image_static %}
+        <img src="{% static image_static %}" width="200" height="200" class="img-thumbnail" >
+      {% endwith %}
+
+      
+    </center>
+
+  {% endfor %}
+  <!--<div class="container">
       <center>
       <p> {{result.name}} </p>
       <p> {{result.address}} </p>
@@ -87,8 +106,7 @@
 
 
       </div>
-    </div>
-  </div>
+  </div>-->
   {% endif %}
 {% endblock %}
 

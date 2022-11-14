@@ -1,5 +1,6 @@
 from django.conf import settings
 import googlemaps
+import random
 
 class API_Controller():
     def __init__(self, search_location:str='') -> None:
@@ -7,17 +8,19 @@ class API_Controller():
         self.search_location = search_location
 
 
-    def get_photo(self, photo_reference:str) -> list:
+    def get_photo(self, photo_reference:str) -> str:
         try:
-            photo_name = photo_reference + '.jpg'
+            photo_name = 'photo{}.jpg'.format(str(random.randint(0,1000)))
+
             finall_photo = self.client.places_photo(photo_reference=photo_reference, max_width=400, max_height=400)
-            
-            with open('photos/{}'.format(photo_name), 'wb') as f:
+            print('ok..')
+            with open('static/photos/{}'.format(photo_name), 'wb') as f:
                 for chunk in finall_photo:
                     if chunk:
                         f.write(chunk)
             return photo_name
-        except:
+        except Exception as e:
+            print(e)
             return ''
 
     def get_photos(self, place_id:str):
@@ -26,10 +29,10 @@ class API_Controller():
             photos:list = self.client.place(place_id=place_id, fields=['photo'])['result']['photos']
         
             for photo in photos:
-                photo_name = str(photo['photo_reference']) + '.jpg'
+                photo_name = 'photo{}.jpg'.format(str(random.randint(0,10000)))
                 finall_photo = self.client.places_photo(photo_reference=photo['photo_reference'], max_width=400, max_height=400)
 
-                with open('photos/{}'.format(photo_name), 'wb') as f:
+                with open('static/photos/{}'.format(photo_name), 'wb') as f:
                     for chunk in finall_photo:
                         if chunk:
                             photos_names.append(photo_name)
@@ -71,7 +74,8 @@ class API_Controller():
                     place_id = result['place_id']
 
                 if 'photos' in result:
-                    photo_name = self.get_photo(result['photos'][0]['photo_reference'])
+                    print('ref ok..')
+                    photo_name = self.get_photo(str(result['photos'][0]['photo_reference']))
 
                 if category == 'place':
                     data.append({

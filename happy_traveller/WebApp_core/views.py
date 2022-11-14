@@ -12,7 +12,7 @@ def home(request):
             api = API_Controller(search_location=search)
             infos = api.get_places_info()
             results = []
-
+            #api.get_photos(infos[0]['place_id'])
             for info in infos:
                 if info['category'] == 'city' and option == 'city':
                     results.append(info)
@@ -23,6 +23,7 @@ def home(request):
             context = {
                 "search":True,
                 "results":results}
+            print(context)
         else:
             context = {"search":False}
         

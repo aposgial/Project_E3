@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.profile.has_profile %}
+        <div class="container">
+            <br>
+            <h3>Profile details</h3>
+            <br>
+
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Address:</li>
+            <li class="list-group-item">{{request.user.profile.address}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Town:</li>
+            <li class="list-group-item">{{request.user.profile.town}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">County:</li>
+            <li class="list-group-item">{{request.user.profile.county}}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Post code:</li>
+            <li class="list-group-item">{{request.user.profile.post_code}}</li>
+            </ul>
+        </div>
+    {% else %}
+        <center>
+            <br>
+            <h3>Profile</h3>
+            <br><br>
+
+            <div class="container">
+                <form id="profileform" method="POST" action="">
+                    {% csrf_token %}
+
+                    <div class="mb-3 w-25">
+                        <label for="address" class="form-label">Address</label>
+                        {{form.address}}
+                    </div>
+
+                    <div class="mb-3 w-25">
+                        <label for="town" class="form-label">Town</label>
+                        {{form.town}}
+                    </div>
+
+                    <div class="mb-3 w-25">
+                        <label for="county" class="form-label">County</label>
+                        {{form.county}}
+                    </div>
+
+                    <div class="mb-3 w-25">
+                        <label for="post_code" class="form-label">Post code</label>
+                        {{form.post_code}}
+                    </div>
+
+                    <div class="mb-3 w-25">
+                        <label for="country" class="form-label">Country</label>
+                        {{form.country}}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </form>
+            </div>
+        </center>
+    {% endif %}
+{% endblock %}

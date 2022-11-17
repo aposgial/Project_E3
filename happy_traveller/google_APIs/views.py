@@ -1,8 +1,8 @@
 from django.shortcuts import render
-import googlemaps
-from datetime import datetime
+from .controller import API_Controller
 
 # Create your views here.
+<<<<<<< HEAD
 def api_data(request):
     data:dict = {}
 
@@ -88,3 +88,5 @@ def api_data(request):
     return render(request, 'google_APIs/data.html', context=data)
 
     
+=======
+>>>>>>> 8d19033532f2cda4618984c0a6f35cf1eaf6b9b8

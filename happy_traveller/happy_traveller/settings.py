@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-eo$rw6%xda)@##&e1ljs_qac6c^vlo=96^tzwo!at$!zhvkyt5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'WebApp_core.apps.WebappCoreConfig',
-    'register.apps.RegisterConfig',
-    'google_APIs.apps.GoogleApisConfig',
+    'WebApp_core',
+    'register',
+    'google_APIs',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +58,9 @@ ROOT_URLCONF = 'happy_traveller.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            "templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,10 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
-
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 LOGIN_REDIRECT_URL = "/" #home page
 LOGOUT_REDIRECT_URL = "/" #home page
@@ -133,3 +132,9 @@ LOGOUT_REDIRECT_URL = "/" #home page
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECAPTCHA_PRIVATE_KEY = "6Le5p-AiAAAAALxTvL3m0_8oiqitkYxBNeSLNq-Y"
+RECAPTCHA_PUBLIC_KEY = "6Le5p-AiAAAAAPdjK2MAPyKYAVRx2w7t-iQB01q-"
+RECAPTCHA_REQUIRED_SCORE = 0.1
+
+GOOGLE_API_KEY = "AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI"

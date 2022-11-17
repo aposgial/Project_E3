@@ -44,6 +44,7 @@ def api_data(request):
         data['places_namee'] = places_name
     except:
         data['places_namee'] = ''
+        
     try:
         places_open_close = gmaps.places(query = location_name )['results'][0]['opening_hours']['open_now']
         data['places_open_Hours'] = places_open_close

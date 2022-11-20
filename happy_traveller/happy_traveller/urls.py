@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('WebApp_core.urls')),
     path('', include('register.urls')),
+    path('', include('google_APIs.urls')),
     ]
 
 if settings.DEBUG:

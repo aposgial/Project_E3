@@ -101,3 +101,15 @@ class API_Controller():
         except Exception as e:
             print(e)
             return []
+
+
+    def get_places(self, type:str='', country:str=''):
+        query = type + ' ' + country
+        if query:
+            response = self.client.places(query=query)
+            if response['status'] == 'OK':
+                return response['results']
+            else:
+                return []
+        else:
+            return []

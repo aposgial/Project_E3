@@ -101,3 +101,8 @@ class API_Controller():
         except Exception as e:
             print(e)
             return []
+
+
+    def get_place_by_search(self, search_input:str=''):
+        if search_input:
+            place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']

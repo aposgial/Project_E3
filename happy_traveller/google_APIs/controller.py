@@ -1,6 +1,10 @@
 from django.conf import settings
 import googlemaps
 import random
+import json
+
+Country_data:dict ={}
+data:dict = {}
 
 class API_Controller():
     def __init__(self, search_location:str='') -> None:
@@ -16,8 +20,9 @@ class API_Controller():
             with open('static/photos/{}'.format(photo_name), 'wb') as f:
                 for chunk in finall_photo:
                     if chunk:
-                        f.write(chunk)
+                        f.write(chunk)           
             return photo_name
+            
         except Exception as e:
             print(e)
             return ''
@@ -113,3 +118,16 @@ class API_Controller():
                 return []
         else:
             return []
+
+    def get_Random_Place(self):
+        with open('country.json','r') as f:
+         data2=json.load(Country_data,f)
+         listC = random.choice(data2=['key'])
+         print(listC)
+        try:
+             places_id = self.client.places(query= listC , type='tourist_attraction')['results'][0]['place_id']
+             places_info = self.client.place(place_id=places_id)
+             data['place_id']=places_info
+        except:
+             print('Not Found')
+

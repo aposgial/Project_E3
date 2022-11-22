@@ -103,6 +103,26 @@ class API_Controller():
             return []
 
 
-    def get_place_by_search(self, search_input:str=''):
+    def get_place(self, place_id:str='') -> dict:
+        if place_id:
+            try:
+                response = self.client.place(place_id=place_id)
+                if response['status'] == 'OK':
+                    return response['result']
+                else:
+                    return {}
+            except:
+                return {}
+        else:
+            return{}
+
+
+    def get_place_by_search(self, search_input:str='') -> dict:
         if search_input:
-            place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
+            try:
+                place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
+                return self.get_place(place_id=place_id)
+            except:
+                return {}
+        else:
+            return {}

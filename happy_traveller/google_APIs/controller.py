@@ -108,7 +108,36 @@ class API_Controller():
             return []
 
 
+<<<<<<< HEAD
     def get_places(self, type:str='', country:str=''):
+=======
+    def get_place(self, place_id:str='') -> dict:
+        if place_id:
+            try:
+                response = self.client.place(place_id=place_id)
+                if response['status'] == 'OK':
+                    return response['result']
+                else:
+                    return {}
+            except:
+                return {}
+        else:
+            return{}
+
+
+    def get_place_by_search(self, search_input:str='') -> dict:
+        if search_input:
+            try:
+                place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
+                return self.get_place(place_id=place_id)
+            except:
+                return {}
+        else:
+            return {}
+
+    
+    def get_places(self, type:str='', country:str='') -> list:
+>>>>>>> 8f3c5f2fbce3de9b773c2902857ae437ee971f11
         query = type + ' ' + country
         if query:
             response = self.client.places(query=query)
@@ -118,5 +147,9 @@ class API_Controller():
                 return []
         else:
             return []
+<<<<<<< HEAD
 
 
+=======
+            
+>>>>>>> 8f3c5f2fbce3de9b773c2902857ae437ee971f11

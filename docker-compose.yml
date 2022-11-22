@@ -1,0 +1,12 @@
+version: "2.12.2"
+
+services: 
+  web: 
+    tty: true
+    build: 
+        dockerfile: Dockerfile
+        context: .
+    command: bash -c "cd happy_traveller && python manage.py runserver 0.0.0.0:8000 "
+    ports: 
+      - 8000:8000
+    restart: always

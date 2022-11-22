@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from urllib.parse import urlencode
 from urllib.request import urlopen
-import requests, json
+import requests, json, random
 
 
 
@@ -50,3 +50,11 @@ def get_countries() -> list:
     with open('countries_and_cities.json', 'r') as f:
         countries_and_cities:dict = json.load(fp=f)
     return countries_and_cities.keys()
+
+
+def random_pick(input_list:list) -> str:
+	if input_list:
+		return str(random.choice(input_list))
+	else:
+		return ''
+

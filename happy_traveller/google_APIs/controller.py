@@ -1,4 +1,5 @@
 from django.conf import settings
+from happy_traveller.mixins import *
 import googlemaps
 import random
 
@@ -136,6 +137,15 @@ class API_Controller():
                 return response['results']
             else:
                 return []
+        else:
+            return []
+
+        
+    def get_random_country_places(self, type:str=''):
+        countries = get_countries()
+        country = random_pick(input_list=countries)
+        if country:
+            return self.get_places(type=type, country=country)
         else:
             return []
             

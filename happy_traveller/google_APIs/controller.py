@@ -3,6 +3,7 @@ from happy_traveller.mixins import *
 import googlemaps
 import random
 
+
 class API_Controller():
     def __init__(self, search_location:str='') -> None:
         self.client = googlemaps.Client(key=settings.GOOGLE_API_KEY)
@@ -133,7 +134,7 @@ class API_Controller():
         query = type + ' ' + country
         if query:
             response = self.client.places(query=query)
-            if response['status'] == 'OK':
+            if response[''] == 'OK':
                 return response['results']
             else:
                 return []
@@ -148,4 +149,18 @@ class API_Controller():
             return self.get_places(type=type, country=country)
         else:
             return []
-            
+
+
+    def get_near_by_places(self, type:str=''):
+        my_data = get_current_location()
+        if my_data is not None:
+            try:
+                response = self.client.places_nearby(location=my_data['loc'], radius=1000, type=type)
+                if response['status'] == 'OK':
+                    return response['results']
+                else:
+                    return []
+            except:
+                return []
+        else:
+            return []

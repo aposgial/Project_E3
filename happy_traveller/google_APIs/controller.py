@@ -119,15 +119,4 @@ class API_Controller():
         else:
             return []
 
-    def get_Random_Place(self):
-        with open('country.json','r') as f:
-         data2=json.load(Country_data,f)
-         listC = random.choice(data2=['key'])
-         print(listC)
-        try:
-             places_id = self.client.places(query= listC , type='tourist_attraction')['results'][0]['place_id']
-             places_info = self.client.place(place_id=places_id)
-             data['place_id']=places_info
-        except:
-             print('Not Found')
 

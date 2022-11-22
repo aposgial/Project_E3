@@ -43,3 +43,10 @@ def get_current_location() -> dict:
 		return json.load(response)
 	except:
 		return {}
+
+
+# get all countries from countries_and_cities json file
+def get_countries() -> list:
+    with open('countries_and_cities.json', 'r') as f:
+        countries_and_cities:dict = json.load(fp=f)
+    return countries_and_cities.keys()

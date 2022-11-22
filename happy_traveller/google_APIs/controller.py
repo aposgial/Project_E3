@@ -126,4 +126,16 @@ class API_Controller():
                 return {}
         else:
             return {}
+
+    
+    def get_places(self, type:str='', country:str='') -> list:
+        query = type + ' ' + country
+        if query:
+            response = self.client.places(query=query)
+            if response['status'] == 'OK':
+                return response['results']
+            else:
+                return []
+        else:
+            return []
             

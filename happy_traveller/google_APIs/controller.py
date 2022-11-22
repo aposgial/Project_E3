@@ -101,3 +101,17 @@ class API_Controller():
         except Exception as e:
             print(e)
             return []
+
+
+    def get_place(self, place_id:str=''):
+        if place_id:
+            try:
+                response = self.client.place(place_id=place_id)
+                if response['status'] == 'OK':
+                    return response['result']
+                else:
+                    return {}
+            except:
+                return {}
+        else:
+            return{}

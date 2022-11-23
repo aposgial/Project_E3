@@ -5,7 +5,6 @@ from urllib.request import urlopen
 import requests, json, random
 
 
-
 #Handles form errors that are passed back to AJAX calls
 def FormErrors(*args):
 	message = ""
@@ -45,13 +44,17 @@ def get_current_location() -> dict:
 		return {}
 
 
+def get_place_types() -> list:
+	with open('static/place_types.json', 'r') as f:
+		return json.load(fp=f)
+
 # get all countries from countries_and_cities json file
 def get_countries() -> list:
-    with open('countries_and_cities.json', 'r') as f:
+    with open('static/countries_and_cities.json', 'r') as f:
         countries_and_cities:dict = json.load(fp=f)
     return countries_and_cities.keys()
 
-
+# select a random value from a list
 def random_pick(input_list:list) -> str:
 	if input_list:
 		return str(random.choice(input_list))

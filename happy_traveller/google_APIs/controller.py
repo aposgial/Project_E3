@@ -134,7 +134,7 @@ class API_Controller():
         query = type + ' ' + country
         if query:
             response = self.client.places(query=query)
-            if response[''] == 'OK':
+            if response['status'] == 'OK':
                 return response['results']
             else:
                 return []
@@ -142,7 +142,7 @@ class API_Controller():
             return []
 
         
-    def get_random_country_places(self, type:str=''):
+    def get_random_country_places(self, type:str='') -> list:
         countries = get_countries()
         country = random_pick(input_list=countries)
         if country:
@@ -151,7 +151,7 @@ class API_Controller():
             return []
 
 
-    def get_near_by_places(self, type:str=''):
+    def get_near_by_places(self, type:str='') -> list:
         my_data = get_current_location()
         if my_data is not None:
             try:

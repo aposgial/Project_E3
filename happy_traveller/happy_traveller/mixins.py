@@ -52,7 +52,7 @@ def get_place_types() -> list:
 def get_countries() -> list:
     with open('static/countries_and_cities.json', 'r') as f:
         countries_and_cities:dict = json.load(fp=f)
-    return countries_and_cities.keys()
+    return list(countries_and_cities.keys())
 
 # select a random value from a list
 def random_pick(input_list:list) -> str:

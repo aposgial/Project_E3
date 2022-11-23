@@ -3,12 +3,19 @@ from google_APIs.controller import API_Controller
 
 # Create your views here.
 def home(request):
+    api = API_Controller()
+    tourist_attraction = api.get_random_country_places(type='tourist_attraction')[:5]
+    museum = api.get_random_country_places(type='museum')
+    park = api.get_random_country_places(type='park')
+
+
+
     if request.method == 'GET':
         search = request.GET.get('search')
         option = request.GET.get('flexRadioDefault')
 
         if search and option:
-            api = API_Controller(search_location=search)
+            api.search_location = search
             infos = api.get_places_info()
             results = []
             
@@ -23,6 +30,10 @@ def home(request):
                 "search":True,
                 "results":results}
         else:
-            context = {"search":False}
+            context = {
+                "search":False,
+                "tourist_attraction":tourist_attraction,
+                "museum":museum,
+                "park":park}
         
     return render(request, 'WebApp_core/home.html', context=context)

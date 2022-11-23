@@ -30,28 +30,28 @@
   </center> 
 
 
-{% if search %}
-  <center> <h3>Photo Album</h3> </center>
-  <br>
+  {% if search %}
+    <center> <h3>Photo Album</h3> </center>
+    <br>
 
-  {% for result in results %}
-    <center>
-      <p> {{result.name}} </p>
-      <p> {{result.formatted_address}} </p>
-      <p> {{result.loclat}} </p>
-      <p> {{result.loclng}} </p>
-      <p> {{result.open_now}} </p>
-      <p> {{result.rating}} </p>
+    {% for result in results %}
+      <center>
+        <p> {{result.name}} </p>
+        <p> {{result.formatted_address}} </p>
+        <p> {{result.loclat}} </p>
+        <p> {{result.loclng}} </p>
+        <p> {{result.open_now}} </p>
+        <p> {{result.rating}} </p>
 
-      {% with 'photos/'|add:result.photo_name as image_static %}
-        <img src="{% static image_static %}" width="200" height="200" class="img-thumbnail" >
-      {% endwith %}
+        {% with 'photos/'|add:result.photo_name as image_static %}
+          <img src="{% static image_static %}" width="200" height="200" class="img-thumbnail" >
+        {% endwith %}
 
-      
-    </center>
+        
+      </center>
 
-  {% endfor %}
-  <!--<div class="container">
+    {% endfor %}
+    <!--<div class="container">
       <center>
       <p> {{result.name}} </p>
       <p> {{result.address}} </p>
@@ -106,8 +106,15 @@
 
 
       </div>
-  </div>-->
+    </div>-->
   {% endif %}
+  
+  <h5>{{ tourist_attraction }}</h5>
+  <br>
+  <h5>{{ museum }}</h5>
+  <br>
+  <h5>{{ park }}</h5>
+
 {% endblock %}
 
 

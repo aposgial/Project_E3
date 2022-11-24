@@ -24,6 +24,14 @@ class API_Controller():
             print(e)
             return ''
 
+    def get_photo_from_all_places(self, places:list):
+        for place in places:
+            print(place['photos'][0]['photo_reference'])
+            photo = place['photos'][0]['photo_reference']
+            place['photo_name'] = self.get_photo(photo_reference=photo)
+        return places
+            
+
     def get_photos(self, place_id:str):
         photos_names = []
         try:

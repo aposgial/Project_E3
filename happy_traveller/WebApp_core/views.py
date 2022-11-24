@@ -4,10 +4,15 @@ from google_APIs.controller import API_Controller
 # Create your views here.
 def home(request):
     api = API_Controller()
+    samples = 3
+    context = {}
 
-    tourist_attraction = api.get_random_country_places(type='tourist_attraction')[:5]
-    museum = api.get_random_country_places(type='museum')[:5]
-    park = api.get_random_country_places(type='park')[:5]
+    places = api.get_random_country_places(type='tourist_attraction')[:samples]
+    tourist_attraction = api.get_photo_from_all_places(places)
+    
+    museum = api.get_random_country_places(type='museum')[:samples]
+    park = api.get_random_country_places(type='park')[:samples]
+
 
     if request.method == 'GET':
         search = request.GET.get('search')
@@ -21,6 +26,7 @@ def home(request):
             for info in infos:
                 if info['category'] == 'city' and option == 'city':
                     results.append(info)
+                    
 
                 elif info['category'] == 'place' and option == 'place':
                     results.append(info)
@@ -30,13 +36,10 @@ def home(request):
                 "results":results}
         else:
             context = {
-                "search":False,
-                "tourist_attraction":tourist_attraction,
-                "museum":museum,
-                "park":park}
+                "search":False}
 
-    context['tourist_attraction'] = tourist_attraction,
-    context['museum']
-    context['park']
-
+    context['tourist_attraction'] = tourist_attraction
+    context['museum'] = museum
+    context['park'] = park
+    
     return render(request, 'WebApp_core/home.html', context=context)

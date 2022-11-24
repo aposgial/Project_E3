@@ -3,13 +3,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from happy_traveller.mixins import reCAPTCHAValidation
 from django.contrib.auth.models import User
+from happy_traveller.mixins import *
+from google_APIs.controller import API_Controller
 from django.conf import settings
 from .forms import *
 
 
 @login_required(login_url='signin')
 def account(request):
-    return render(request, 'register/account.html')
+    api = API_Controller()
+    places = api.get_near_by_places(type='ber')
+
+    content ={"places":places}
+    return render(request, 'register/account.html', context=content)
 
 
 @login_required(login_url='signin')

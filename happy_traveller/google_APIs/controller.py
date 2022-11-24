@@ -1,6 +1,8 @@
 from django.conf import settings
+from happy_traveller.mixins import *
 import googlemaps
 import random
+
 
 class API_Controller():
     def __init__(self, search_location:str='') -> None:
@@ -21,6 +23,14 @@ class API_Controller():
         except Exception as e:
             print(e)
             return ''
+
+    def get_photo_from_all_places(self, places:list):
+        for place in places:
+            print(place['photos'][0]['photo_reference'])
+            photo = place['photos'][0]['photo_reference']
+            place['photo_name'] = self.get_photo(photo_reference=photo)
+        return places
+            
 
     def get_photos(self, place_id:str):
         photos_names = []
@@ -100,4 +110,65 @@ class API_Controller():
             return data
         except Exception as e:
             print(e)
+            return []
+
+
+    def get_place(self, place_id:str='') -> dict:
+        if place_id:
+            try:
+                response = self.client.place(place_id=place_id)
+                if response['status'] == 'OK':
+                    return response['result']
+                else:
+                    return {}
+            except:
+                return {}
+        else:
+            return{}
+
+
+    def get_place_by_search(self, search_input:str='') -> dict:
+        if search_input:
+            try:
+                place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
+                return self.get_place(place_id=place_id)
+            except:
+                return {}
+        else:
+            return {}
+
+    
+    def get_places(self, type:str='', country:str='') -> list:
+        query = type + ' ' + country
+        if query:
+            response = self.client.places(query=query)
+            if response['status'] == 'OK':
+                return response['results']
+            else:
+                return []
+        else:
+            return []
+
+        
+    def get_random_country_places(self, type:str='') -> list:
+        countries = get_countries()
+        country = random_pick(input_list=countries)
+        if country:
+            return self.get_places(type=type, country=country)
+        else:
+            return []
+
+
+    def get_near_by_places(self, type:str='') -> list:
+        my_data = get_current_location()
+        if my_data is not None:
+            try:
+                response = self.client.places_nearby(location=my_data['loc'], radius=1000, type=type)
+                if response['status'] == 'OK':
+                    return response['results']
+                else:
+                    return []
+            except:
+                return []
+        else:
             return []

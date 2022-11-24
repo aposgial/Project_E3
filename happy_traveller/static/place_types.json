@@ -1,0 +1,16 @@
+{
+    "type":[
+        "amusement_park",
+        "aquarium",
+        "art_gallery",
+        "casino",
+        "lodging",
+        "mosque",
+        "museum",
+        "park",
+        "stadium",
+        "synagogue",
+        "tourist_attraction",
+        "zoo"
+    ]
+}

@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from google_APIs.controller import API_Controller
+from happy_traveller.mixins import get_random_country
 
 # Create your views here.
 def home(request):
     api = API_Controller()
-    samples = 3
+    samples = 6
     context = {}
 
-    places = api.get_random_country_places(type='tourist_attraction')[:samples]
+    country = get_random_country()
+    places = api.get_places(type='tourist_attraction', country=country)
     tourist_attraction = api.get_photo_from_all_places(places)
     
-    museum = api.get_random_country_places(type='museum')[:samples]
-    park = api.get_random_country_places(type='park')[:samples]
+    #museum = api.get_random_country_places(type='museum')[:samples]
+    #park = api.get_random_country_places(type='park')[:samples]
 
 
     if request.method == 'GET':
@@ -37,9 +39,19 @@ def home(request):
         else:
             context = {
                 "search":False}
+    
+    if len(tourist_attraction) % 2 == 0:
+        #temp = zip(*(iter(tourist_attraction),)*group)
+        pass
+    else:
+        pass
 
-    context['tourist_attraction'] = tourist_attraction
-    context['museum'] = museum
-    context['park'] = park
+    context = {
+        "country": country,
+        "tourist_attraction": tourist_attraction
+    }
+
+    #context['museum'] = zip(*(iter(museum),)*group)
+    #context['park'] = zip(*(iter(park),)*group)
     
     return render(request, 'WebApp_core/home.html', context=context)

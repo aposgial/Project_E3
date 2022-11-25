@@ -61,3 +61,7 @@ def random_pick(input_list:list) -> str:
 	else:
 		return ''
 
+# return a random country from countries_and_cities json file
+def get_random_country() -> str:
+    return random_pick(input_list=get_countries())
+

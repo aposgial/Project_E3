@@ -1,7 +1,7 @@
 from django.conf import settings
 from happy_traveller.mixins import *
 import googlemaps
-import random
+import random, time
 
 
 class API_Controller():
@@ -25,10 +25,13 @@ class API_Controller():
             return ''
 
     def get_photo_from_all_places(self, places:list):
-        for place in places:
-            print(place['photos'][0]['photo_reference'])
-            photo = place['photos'][0]['photo_reference']
-            place['photo_name'] = self.get_photo(photo_reference=photo)
+        for index, place in enumerate(places):
+            try:
+                photo = place['photos'][0]['photo_reference']
+                place['photo_name'] = self.get_photo(photo_reference=photo)
+                #time.sleep(0.5)
+            except KeyError:
+                places.pop(index)
         return places
             
 
@@ -151,8 +154,7 @@ class API_Controller():
 
         
     def get_random_country_places(self, type:str='') -> list:
-        countries = get_countries()
-        country = random_pick(input_list=countries)
+        country = get_random_country()
         if country:
             return self.get_places(type=type, country=country)
         else:

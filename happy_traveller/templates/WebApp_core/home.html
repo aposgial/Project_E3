@@ -51,65 +51,20 @@
       </center>
 
     {% endfor %}
-    <!--<div class="container">
-      <center>
-      <p> {{result.name}} </p>
-      <p> {{result.address}} </p>
-      <p> {{result.loclat}} </p>
-      <p> {{result.loclng}} </p>
-      <p> {{result.open_now}} </p>
-      <p> {{result.rating}} </p>
-      <div class="row">
-      </center>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo0.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div> 
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo1.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-          <p>fwto prwti</p>
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo2.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-          <p>fwto 2</p>
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo3.jpg' %}" width="200" height="200" class="img-thumbnail" >  
-          <p>dokimi3</p>
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo4.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo5.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo6.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo7.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo8.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo9.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-
-      </div>
-    </div>-->
   {% endif %}
   
-  <h5>{{ tourist_attraction }}</h5>
+
+  {% if tourist_attraction %}
+    <h3>Tourist attractions form {{ country }}</h3>
+    <br>
+    {% include 'partials/cards.html' with tourist_attraction=tourist_attraction %}
+    <br>
+    <br>
+  {% endif %}
+
+  <br>
+  <br>
+  <br>
   <br>
   <h5>{{ museum }}</h5>
   <br>

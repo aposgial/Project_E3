@@ -55,18 +55,21 @@
   
 
   {% if tourist_attraction %}
-    <h3>Tourist attractions form {{ country }}</h3>
+    <h3>Top tourist attractions for {{ country }}</h3>
     <br>
-    {% include 'partials/cards.html' with tourist_attraction=tourist_attraction %}
-    <br>
-    <br>
+    {% include 'partials/cards.html' with results=tourist_attraction %}
   {% endif %}
 
   <br>
   <br>
-  <br>
-  <br>
-  <h5>{{ museum }}</h5>
+
+  {% if museum %}
+    <h3>Most famous museums for {{ country }}</h3>
+    <br>
+    {% include 'partials/cards.html' with results=museum %}
+    <br>
+    <br>
+  {% endif %}
   <br>
   <h5>{{ park }}</h5>
 

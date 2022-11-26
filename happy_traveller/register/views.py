@@ -12,9 +12,15 @@ from .forms import *
 @login_required(login_url='signin')
 def account(request):
     api = API_Controller()
-    places = api.get_near_by_places(type='ber')
+    samples = 3
+    context = {}
 
-    content ={"places":places}
+    places = api.get_near_by_places(type='bar')[:samples]
+    bar = api.get_photo_from_all_places(places)
+
+    content = {
+        "bar": bar
+        }
     return render(request, 'register/account.html', context=content)
 
 

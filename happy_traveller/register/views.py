@@ -15,10 +15,18 @@ def account(request):
     samples = 3
     context = {}
 
+    places = api.get_near_by_places(type='hotel')[:samples]
+    hotel = api.get_photo_from_all_places(places)
+
+    places = api.get_near_by_places(type='cafe')[:samples]
+    cafe = api.get_photo_from_all_places(places)
+
     places = api.get_near_by_places(type='bar')[:samples]
     bar = api.get_photo_from_all_places(places)
 
     content = {
+        "hotel": hotel,
+        "cafe": cafe,
         "bar": bar
         }
     return render(request, 'register/account.html', context=content)

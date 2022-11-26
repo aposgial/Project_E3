@@ -5,19 +5,18 @@ from happy_traveller.mixins import get_random_country
 # Create your views here.
 def home(request):
     api = API_Controller()
+    country = get_random_country()
     samples = 3
     context = {}
 
-    country = get_random_country()
     places = api.get_places(type='tourist_attraction', country=country)[:samples]
     tourist_attraction = api.get_photo_from_all_places(places)
     
-    country = get_random_country()
     places = api.get_places(type='museum', country=country)[:samples]
     museum = api.get_photo_from_all_places(places)
     
-    #park = api.get_random_country_places(type='park')[:samples]
-
+    places = api.get_places(type='park', country=country)[:samples]
+    park = api.get_photo_from_all_places(places)
 
     if request.method == 'GET':
         search = request.GET.get('search')
@@ -52,10 +51,10 @@ def home(request):
     context = {
         "country": country,
         "tourist_attraction": tourist_attraction,
-        "museum": museum
+        "museum": museum,
+        "park": park
     }
 
-    #context['museum'] = zip(*(iter(museum),)*group)
-    #context['park'] = zip(*(iter(park),)*group)
+    #zip(*(iter(park),)*group)
     
     return render(request, 'WebApp_core/home.html', context=context)

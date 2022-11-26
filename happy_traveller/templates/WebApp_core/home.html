@@ -53,14 +53,14 @@
     {% endfor %}
   {% endif %}
   
-
   {% if tourist_attraction %}
     <h3>Top tourist attractions for {{ country }}</h3>
     <br>
     {% include 'partials/cards.html' with results=tourist_attraction %}
+    <br>
+    <br>
   {% endif %}
 
-  <br>
   <br>
 
   {% if museum %}
@@ -70,8 +70,14 @@
     <br>
     <br>
   {% endif %}
-  <br>
-  <h5>{{ park }}</h5>
+
+  {% if park %}
+    <h3>Most parks museums for {{ country }}</h3>
+    <br>
+    {% include 'partials/cards.html' with results=park %}
+    <br>
+    <br>
+  {% endif %}
 
 {% endblock %}
 

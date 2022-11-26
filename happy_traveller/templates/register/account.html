@@ -53,6 +53,34 @@
       {% endif %}
 
     </div>
-    <h5>{{ places }}</h5>
+    
+    <center>
+      <h3>Top results for your area</h3>
+    </center>
+
+    {% if hotel %}
+      <h3>Top hotels</h3>
+      <br>
+      {% include 'partials/cards.html' with results=hotel %}
+    {% endif %}
+    
+    <br>
+    <br>
+
+    {% if cafe %}
+      <h3>Top cafe</h3>
+      <br>
+      {% include 'partials/cards.html' with results=cafe %}
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if bar %}
+      <h3>Top bars</h3>
+      <br>
+      {% include 'partials/cards.html' with results=bar %}
+    {% endif %}
+
 {% endblock %}
 

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="margin: auto;width: 65%;padding: 10px;">
+        <br>
+        <h2><b>{{ result.name }}</b></h2>
+
+        <h5><p>{{ result.types }}</p></h5>
+
+        <h5>{{ result.photos_names }}</h5>
+
+        <h5>address: {{ result.formatted_address }}</h5>
+
+        <h5>phone number: {{ result.international_phone_number }}</h5>
+
+        <h5>open now: {{ result.opening_hours.open_now }}</h5>
+
+        <h5>schedule: {{ result.opening_hours.weekday_text }}</h5>
+
+        <h5>price level: {{ result.price_level }}</h5>
+
+        <h5>rating: {{ result.rating }}</h5>
+
+        <h5>reviews: {{ result.reviews }}</h5>
+
+        <h5>maps: {{ result.url }}</h5>
+        
+        <h5>user ratings total: {{ result.user_ratings_total }}</h5>
+
+        <h5>website: {{ result.website }}</h5>
+    </div>
+{% endblock %}

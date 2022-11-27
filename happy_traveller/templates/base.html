@@ -1,136 +1,129 @@
-{% load static %}
+<!-- {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- marios -->
-    <!-- <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{% static 'icons/globe.png' %}">
-    <title>Happy Traveller</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<html>
+    <head>
+        marios
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="{% static 'icons/globe.png' %}">
+        <title>Happy Traveller</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    {% block navbar %}
+        {% block navbar %}
 
-    {% endblock %}
+        {% endblock %}
 
-    {% block extend_head %}
+        {% block extend_head %}
 
 
-    {% endblock %} -->
-    <!-- mariosss -->
-    <!-- mariol -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Happy Traveller</title>
-    <meta name="description" content="">
-    <meta name="veiwport" content="width=device-width,initial-scale=1">
-              <!-- font awesome cdn -->
-    <link rel="stylesheet" href="https://cdnjs.
-    cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.
-    css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/
-    9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" 
-    referrerpolicy="no-referrer" />
+        {% endblock %}
+        mariosss
+    </head>
 
-    <!-- fonts -->
-    <link rel="stylesheet" href="fonts/css.css">
-    <!-- normalize css -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- custom css -->
-    
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/utility.css">
-    
+    <body>
+        marioss
+      
+        {% include 'partials/nav_bar.html' %}
+        
+        {% block content %}
+        
+                
+                
+            {% endblock%}
+        
 
-    <!-- <a href="#" class="logo"><span>H</span>appy<span>T</span>raveller</a> 
+        {% block footer %}
 
-    <nav class="navbar">
-        <a href="#home">home</a>
-        <a href="#contact">contact</a>
-    </nav>
+        {% endblock %}
 
-    <div class="icons">
-        <i class="fas fa-search" id="search-btn"></i>
-        <i class="fas fa-user" id="login-btn"></i>
+        <script src="{% static 'main.js' %}"></script>
+    </body>
+</html> -->
 
-    </div> -->
-    <!-- mariol -->
-</head>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Happy Traveller</title>
+        <meta name="description" content="">
+        <meta name="veiwport" content="width=device-width, initial-scale=1">
+                <!-- font awesome cdn -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.
+        com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+
+         ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+         crossorigin="anonymous" 
+         referrerpolicy="no-referrer" />
 
-<body>
+        
+        <!-- fonts -->
+        <link rel="stylesheet" href="fonts/css.css">
+        <!-- normalize css -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <!-- custom css -->
+        
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/utility.css">
 
-    <!-- mariol -->
-    <nav class="navbar">
-        <div class="container flex">
-            <a href="base.html" class="site-brand">
-                Happy<span>Traveller</span>
-            </a>
+    </head>
+    <body>
 
-            <button type ="button" id = "navbar-show-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div id = "navbar-collapse">
-                <button type="button" id="navbar-close-btn">
-                    <i class="fas fa-times"></i>
+        <!-- mariol -->
+        <nav class="navbar">
+            <div class="container flex">
+                <a href="base.html" class="site-brand">
+                    Happy<span>Traveller</span>
+                </a>
+
+                <button type ="button" id = "navbar-show-btn">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <ul class="navbar-nav">
-                    <li class = "nav-item">
-                        <a href="base.html" class="nav-link">Home</a>
-                    </li>
-                    <li class = "nav-item">
-                        <a href="base.html" class="nav-link">Gallery</a>
-                    </li>
-                    <li class = "nav-item">
-                        <a href="base.html" class="nav-link">About</a>
-                    </li>
-                </ul>
-                 
-        </div>
-    </nav>
-    <!-- end of navbar -->
-
-
-    <!-- header -->
-    <header class="flex">
-        <div class="container">
-            <div class="header-title">
-                <h1>Leave Your Footprints</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque reiciendis suscipit, incidunt et similique consequuntur dolorum rerum omnis. Nemo, temporibus?</p>
+                <div id = "navbar-collapse">
+                    <button type="button" id="navbar-close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="navbar-nav">
+                        <li class = "nav-item">
+                            <a href="base.html" class="nav-link">Home</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href="base.html" class="nav-link">Gallery</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a href="base.html" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                    
             </div>
-            <div class="header-form">
-                <h2>Choose Your Travel Location:</h2>
-                <form class="flex">
-                    <input type="text" class="form-control"
-                    placeholder="Destination">
-                    <input type="submit" class="btn"
-                    value="Search">
+        </nav>
+        <!-- end of navbar -->
 
-                </form>
+
+        <!-- header -->
+        <header class="flex">
+            <div class="container">
+                <div class="header-title">
+                    <h1>Leave Your Footprints</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque reiciendis suscipit, incidunt et similique consequuntur dolorum rerum omnis. Nemo, temporibus?</p>
+                </div>
+                <div class="header-form">
+                    <h2>Choose Your Travel Location:</h2>
+                    <form class="flex">
+                        <input type="text" class="form-control"
+                        placeholder="Destination">
+                        <input type="submit" class="btn"
+                        value="Search">
+
+                    </form>
+                </div>
             </div>
-        </div>
-    </header>
-
-    <!-- mariol -->
-    <!-- marioss -->
-<!--   
-    {% include 'partials/nav_bar.html' %}
-    
-    {% block content %}
-    
-              
-             
-        {% endblock%}
-    
-
-    {% block footer %}
-
-    {% endblock %}
-
-    <script src="{% static 'main.js' %}"></script> -->
-</body>
+        </header>
+    </body>
 </html>
-

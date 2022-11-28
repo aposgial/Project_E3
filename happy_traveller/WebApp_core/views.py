@@ -7,7 +7,7 @@ from happy_traveller.mixins import get_random_country
 def home(request):
     api = API_Controller()
     country = get_random_country()
-    samples = 2
+    samples = 1
     context = {}
 
     if request.method == 'GET':
@@ -16,7 +16,11 @@ def home(request):
 
         if search:
             result = api.get_place_by_search(search_input=search)
-            result['photos_names'] = api.get_photos_from_place(photos=result['photos'][:samples])
+            if 'photos' in result:
+                temp = api.get_photos_from_place(photos=result['photos'][:samples])
+            else:
+                temp = []
+            result['photos_names'] = temp
             
             return render(request, 'WebApp_core/place_details.html', context={"result":result})
 

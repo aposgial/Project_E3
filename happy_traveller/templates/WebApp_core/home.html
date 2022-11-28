@@ -2,45 +2,51 @@
 {% load static %}
 
 {% block content %}
-  <center>
-    <br>
-    <div class="container">
-      <form id="searchbar" method="get" action="">
-          <div class="mb-3 w-25">
-              <label for="username" class="form-label">Search place</label>
-              <input type="search" name="search" class="form-control me-2">
-          </div>
-          <button type="submit" class="btn btn-primary">Search</button>
-      </form>
+    <div style="margin: auto;width: 65%;padding: 10px;">
+        <center>
+            <br>
+            <div class="card bg-dark text-white">
+                <img src="https://i.pinimg.com/originals/b5/09/ed/b509ed5f657b87def2424e990badd2d6.jpg" class="card-img">
+                <div class="card-img-overlay">
+                    <form id="searchbar" method="get" action="">
+                        <br><br><br><br><br><br><br><br>
+                        <div class="mb-3 w-25">
+                            <input type="search" name="search" class="form-control me-2">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </center>
+        
+        <hr>
+        <br>
+        {% if tourist_attraction %}
+            <h3>Top tourist attractions for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=tourist_attraction %}
+            <br>
+            <br>
+        {% endif %}
+
+        <br>
+
+        {% if museum %}
+            <h3>Most famous museums for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=museum %}
+            <br>
+            <br>
+        {% endif %}
+
+        {% if park %}
+            <h3>Most parks for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=park %}
+            <br>
+            <br>
+        {% endif %}
     </div>
-  </center> 
-  
-  {% if tourist_attraction %}
-    <h3>Top tourist attractions for {{ country }}</h3>
-    <br>
-    {% include 'partials/cards.html' with results=tourist_attraction %}
-    <br>
-    <br>
-  {% endif %}
-
-  <br>
-
-  {% if museum %}
-    <h3>Most famous museums for {{ country }}</h3>
-    <br>
-    {% include 'partials/cards.html' with results=museum %}
-    <br>
-    <br>
-  {% endif %}
-
-  {% if park %}
-    <h3>Most parks museums for {{ country }}</h3>
-    <br>
-    {% include 'partials/cards.html' with results=park %}
-    <br>
-    <br>
-  {% endif %}
-
 {% endblock %}
 
 

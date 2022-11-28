@@ -29,7 +29,7 @@
                     <img src="{% static 'icons/map_pointer.png' %}" width="28" height="28">
 
                     {% if result.url %}
-                        <a href="{{ result.formatted_address }}" class="link-dark">{{ result.formatted_address }}</a>
+                        <a href="{{ result.url }}" class="link-dark">{{ result.formatted_address }}</a>
                     {% else %}
                         {{ result.formatted_address }}
                     {% endif %}
@@ -256,7 +256,7 @@
                 {% endif %}
             </div>
             <br>
-            
+
             {% for review in result.reviews %}
 
                 <div class="card mb-3" style="max-width: 540px;">

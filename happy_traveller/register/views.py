@@ -14,6 +14,16 @@ def account(request):
     api = API_Controller()
     samples = 3
     context = {}
+    place_id_more_info = request.GET.get('more_info')
+    
+    if place_id_more_info:
+        result = api.get_place(place_id=(place_id_more_info))
+        if 'photos' in result:
+            temp = api.get_photos_from_place(photos=result['photos'][:samples])
+        else:
+            temp = []
+        result['photos_names'] = temp
+        return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
     places = api.get_near_by_places(type='hotel')[:samples]
     hotel = api.get_photo_from_all_places(places)
@@ -24,12 +34,12 @@ def account(request):
     places = api.get_near_by_places(type='bar')[:samples]
     bar = api.get_photo_from_all_places(places)
 
-    content = {
+    context = {
         "hotel": hotel,
         "cafe": cafe,
         "bar": bar
         }
-    return render(request, 'register/account.html', context=content)
+    return render(request, 'register/account.html', context=context)
 
 
 @login_required(login_url='signin')

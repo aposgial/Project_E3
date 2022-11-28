@@ -13,12 +13,11 @@ def home(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         #option = request.GET.get('flexRadioDefault')
-        print('ok1')
+
         if search:
             result = api.get_place_by_search(search_input=search)
-            #result['photos_names'] = api.get_photos_from_place(photos=result['photos'][:samples])
+            result['photos_names'] = api.get_photos_from_place(photos=result['photos'][:samples])
             
-            print('ok2')
             return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
     places = api.get_places(type='tourist_attraction', country=country)[:samples]

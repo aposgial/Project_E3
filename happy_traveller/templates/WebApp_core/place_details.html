@@ -4,30 +4,283 @@
 {% block content %}
     <div style="margin: auto;width: 65%;padding: 10px;">
         <br>
-        <h2><b>{{ result.name }}</b></h2>
-
-        <h5><p>{{ result.types }}</p></h5>
-
-        <h5>{{ result.photos_names }}</h5>
-
-        <h5>address: {{ result.formatted_address }}</h5>
-
-        <h5>phone number: {{ result.international_phone_number }}</h5>
-
-        <h5>open now: {{ result.opening_hours.open_now }}</h5>
-
-        <h5>schedule: {{ result.opening_hours.weekday_text }}</h5>
-
-        <h5>price level: {{ result.price_level }}</h5>
-
-        <h5>rating: {{ result.rating }}</h5>
-
-        <h5>reviews: {{ result.reviews }}</h5>
-
-        <h5>maps: {{ result.url }}</h5>
+        <div class="fs-1 fw-bold">
+            {{ result.name }}
+        </div>
         
-        <h5>user ratings total: {{ result.user_ratings_total }}</h5>
+        <div class="fs-5">
+            <div class="fst-normal">
 
-        <h5>website: {{ result.website }}</h5>
+                {% if result.rating %}
+                    Rating: {{ result.rating }}
+                    &nbsp;&nbsp;
+                {% endif %}
+
+                Categories:
+                {% for type in result.types %}
+                    &#x2022;
+                    <span style="font-weight:lighter;">{{type}}</span>
+                {% endfor %}
+
+            </div>
+            <div style="font-weight:500;">
+
+                {% if result.formatted_address %}
+                    <img src="{% static 'icons/map_pointer.png' %}" width="28" height="28">
+
+                    {% if result.url %}
+                        <a href="{{ result.formatted_address }}" class="link-dark">{{ result.formatted_address }}</a>
+                    {% else %}
+                        {{ result.formatted_address }}
+                    {% endif %}
+                    
+                    <span style="font-weight:100 ;">|</span>
+                {% endif %}
+
+                {% if result.international_phone_number %}
+                    <img src="{% static 'icons/telephone_call.png' %}" width="22" height="22">
+
+                    {{ result.international_phone_number }}
+                    <span style="font-weight:100 ;">|</span>
+                {% endif %}
+
+                {% if result.website %}
+                    <img src="{% static 'icons/internet.png' %}" width="25" height="25">
+                    <a href="{{ result.website }}" class="link-dark">Website</a>
+                    <span style="font-weight:100 ;">|</span>
+                {% endif%}
+
+                {% if result.opening_hours %}
+                    <img src="{% static 'icons/time.png' %}" width="22" height="22">
+
+                    {% if result.opening_hours.open_now %}
+                        Now it's open
+                        <span style="font-weight:100 ;">|</span>
+                    {% else %}
+                        Now it's closed
+                        <span style="font-weight:100 ;">|</span>
+                    {% endif %}
+
+                {% endif%}
+
+            </div>
+        </div>
+        <hr>
+
+        {% if result.photos_names %}
+            {% if result.photos_names.0 %}
+
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                            {% with 'photos/'|add:result.photos_names.0 as image_static %}
+                                <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                            {% endwith %}
+                        </div>
+
+                        {% if result.photos_names.1 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.1 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.2 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.2 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.3 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.3 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.4 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.4 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.5 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.5 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.6 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.6 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.7 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.7 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.8 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.8 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                        {% if result.photos_names.9 %}
+                            <div class="carousel-item">
+                                {% with 'photos/'|add:result.photos_names.9 as image_static %}
+                                    <img src="{% static image_static %}" height="400" class="d-block w-100" >
+                                {% endwith %}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+            {% endif %}
+        {% endif %}
+        
+        <hr>
+        
+        <div class="row justify-content-around">
+                
+            {% if result.opening_hours.weekday_text %}
+                <div class="col-4">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item fs-5 fw-bold" style="background-color: #f3f2f2;">Schedule</li>
+
+                        {% for day in result.opening_hours.weekday_text %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">{{ day }}</li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endif %}
+            
+            {% if result.delivery or result.dine_in or result.curbside_pickup or result.reservable or result.serves_beer or result.serves_breakfast or result.serves_brunch or result.serves_dinner or result.serves_lunch or result.serves_vegetarian_food or result.serves_wine or result.takeout or result.wheelchair_accessible_entrance %}
+                <div class="col-4">
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item fs-5 fw-bold" style="background-color: #f3f2f2;">Utilities</li>
+
+                        {%if result.delivery %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Delivery</li>
+                        {% endif %}
+
+                        {%if result.dine_in %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Dine in</li>
+                        {% endif %}
+
+                        {%if result.curbside_pickup %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Curbside pickup</li>
+                        {% endif %}
+
+                        {%if result.reservable %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Reservable</li>
+                        {% endif %}
+
+                        {%if result.serves_beer %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves beer</li>
+                        {% endif %}
+
+                        {%if result.serves_breakfast %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves breakfast</li>
+                        {% endif %}
+
+                        {%if result.serves_brunch %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves brunch</li>
+                        {% endif %}
+
+                        {%if result.serves_dinner %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves dinner</li>
+                        {% endif %}
+
+                        {%if result.serves_lunch %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves lunch</li>
+                        {% endif %}
+
+                        {%if result.serves_vegetarian_food %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves vegetarian food</li>
+                        {% endif %}
+
+                        {%if result.serves_wine %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Serves wine</li>
+                        {% endif %}
+
+                        {%if result.takeout %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Takeout</li>
+                        {% endif %}
+
+                        {%if result.wheelchair_accessible_entrance %}
+                            <li class="list-group-item" style="background-color: #f3f2f2;">Wheelchair accessible entrance</li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            {% endif %}
+            
+        </div>
+
+        <hr>
+        <!--<h5>price level: {{ result.price_level }}</h5>-->
+        
+        {% if result.reviews %}
+            <div class="fs-4" style="font-weight:500 ;">
+                Reviews
+                {% if result.user_ratings_total %}
+                    <span style="font-weight:300 ;">{{ result.user_ratings_total }}</span>
+                {% endif %}
+            </div>
+            <br>
+            
+            {% for review in result.reviews %}
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                    <div class="col-md-4 text-center  lh-lg">
+                        <br>
+                        <img src="{{ review.profile_photo_url }}" class="img-fluid rounded-start" alt="...">
+                        <div class="card-title">
+                            {{ review.author_name }}
+                            <br>
+                            Rating: {{ review.rating }}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <p class="card-text">{{ review.text }}</p>
+                        <p class="card-text"><small class="text-muted">Posted {{ review.relative_time_description }}</small></p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        {% endif %}
+
     </div>
 {% endblock %}

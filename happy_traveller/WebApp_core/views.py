@@ -7,7 +7,7 @@ from happy_traveller.mixins import get_random_country
 def home(request):
     api = API_Controller()
     country = get_random_country()
-    samples = 1
+    samples = 3
     context = {}
 
     if request.method == 'GET':

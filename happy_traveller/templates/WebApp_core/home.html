@@ -10,48 +10,10 @@
               <label for="username" class="form-label">Search place</label>
               <input type="search" name="search" class="form-control me-2">
           </div>
-          
-          <div class="form-check mb-3 w-25">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="city">
-            <label class="form-check-label" for="flexRadioDefault1">
-              City
-            </label>
-          </div>
-          <div class="form-check mb-3 w-25">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="place" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Place
-            </label>
-          </div>
-
           <button type="submit" class="btn btn-primary">Search</button>
       </form>
     </div>
   </center> 
-
-
-  {% if search %}
-    <center> <h3>Photo Album</h3> </center>
-    <br>
-
-    {% for result in results %}
-      <center>
-        <p> {{result.name}} </p>
-        <p> {{result.formatted_address}} </p>
-        <p> {{result.loclat}} </p>
-        <p> {{result.loclng}} </p>
-        <p> {{result.open_now}} </p>
-        <p> {{result.rating}} </p>
-
-        {% with 'photos/'|add:result.photo_name as image_static %}
-          <img src="{% static image_static %}" width="200" height="200" class="img-thumbnail" >
-        {% endwith %}
-
-        
-      </center>
-
-    {% endfor %}
-  {% endif %}
   
   {% if tourist_attraction %}
     <h3>Top tourist attractions for {{ country }}</h3>

@@ -15,7 +15,9 @@
                     <h5 class="card-title">{{ result.name }}</h5>
                     <p class="card-text">Rating: {{ result.rating }}</p>
                     <p class="card-text">Total score: {{ result.user_ratings_total }}</p>
-                    <a href="#" class="btn btn-primary">More</a>
+                    <form method="get" action="">
+                        <button class="btn btn-primary" name="more_info" type="submit" value="{{ result.place_id }}">More</button>
+                    </form>
                 </div>
             </div>
         </div>

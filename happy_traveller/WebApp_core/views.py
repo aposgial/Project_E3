@@ -12,6 +12,7 @@ def home(request):
 
     if request.method == 'GET':
         search = request.GET.get('search')
+        place_id_more_info = request.GET.get('more_info')
         #option = request.GET.get('flexRadioDefault')
 
         if search:
@@ -21,7 +22,15 @@ def home(request):
             else:
                 temp = []
             result['photos_names'] = temp
-            
+            return render(request, 'WebApp_core/place_details.html', context={"result":result})
+
+        if place_id_more_info:
+            result = api.get_place(place_id=(place_id_more_info))
+            if 'photos' in result:
+                temp = api.get_photos_from_place(photos=result['photos'][:samples])
+            else:
+                temp = []
+            result['photos_names'] = temp
             return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
     places = api.get_places(type='tourist_attraction', country=country)[:samples]
@@ -46,3 +55,4 @@ def home(request):
 
 def place_details(request):
     return render(request, 'WebApp_core/place_details.html')
+

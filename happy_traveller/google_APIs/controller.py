@@ -1,4 +1,3 @@
-from django.conf import settings
 from happy_traveller.mixins import *
 import googlemaps
 import random, time
@@ -6,7 +5,6 @@ import random, time
 
 class API_Controller():
     def __init__(self, search_location:str='') -> None:
-        self.client = googlemaps.Client(key=settings.GOOGLE_API_KEY)
         self.search_location = search_location
 
 
@@ -44,79 +42,6 @@ class API_Controller():
                 photos_names.append(photo_name)
         return photos_names
 
-    
-    def get_places_info(self):
-        data = []
-        results:list = self.client.places(query=self.search_location)['results']
-        try:
-            for result in results:
-                if result['name']:
-                    name = result['name']
-
-                if 'opening_hours' in result:
-                    open_now = result['opening_hours']['open_now']
-                else:
-                    open_now = None
-
-                if 'formatted_address' in result:
-                    formatted_address = result['formatted_address']
-
-                if 'rating' in result:
-                    rating = result['rating']
-                    category = 'place'
-                else:
-                    category = 'city'
-
-                if 'geometry' in result:
-                    lat = result['geometry']['location']['lat']
-                    lng = result['geometry']['location']['lng']
-
-                if 'place_id' in result:
-                    place_id = result['place_id']
-
-                if 'photos' in result:
-                    photo_name = self.get_photo(str(result['photos'][0]['photo_reference']))
-
-                if category == 'place':
-                    data.append({
-                        "category":category,
-                        "name": name,
-                        "open_now":open_now,
-                        "formatted_address":formatted_address,
-                        "rating":rating,
-                        "loclat":lat,
-                        "loclng":lng,
-                        "place_id":place_id,
-                        "photo_name":photo_name
-                    })
-                elif category == 'city':
-                    data.append({
-                        "category":category,
-                        "name": name,
-                        "formatted_address":formatted_address,
-                        "loclat":lat,
-                        "loclng":lng,
-                        "place_id":place_id,
-                        "photo_name":photo_name
-                    })
-            return data
-        except Exception as e:
-            print(e)
-            return []
-
-
-    def get_place(self, place_id:str='') -> dict:
-        if place_id:
-            try:
-                response = self.client.place(place_id=place_id)
-                if response['status'] == 'OK':
-                    return response['result']
-                else:
-                    return {}
-            except:
-                return {}
-        else:
-            return {}
 
 
     def get_place_by_search(self, search_input:str='') -> dict:
@@ -130,16 +55,7 @@ class API_Controller():
             return {}
 
     
-    def get_places(self, type:str='', country:str='') -> list:
-        query = type + ' ' + country
-        if query:
-            response = self.client.places(query=query)
-            if response['status'] == 'OK':
-                return response['results']
-            else:
-                return []
-        else:
-            return []
+    
 
         
     def get_random_country_places(self, type:str='') -> list:

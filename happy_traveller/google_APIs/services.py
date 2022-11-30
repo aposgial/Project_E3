@@ -139,7 +139,7 @@ class GoogleMapsApi:
                 "status": 11001
                 }
 
-    def get_near_by_places(self, location:str, radius=1000, type:str='') -> list:
+    def get_near_by_places(self, location:str, radius=1000, type:str='') -> dict:
         try:
             response = self.client.places_nearby(location=location, radius=radius, type=type)
 
@@ -183,7 +183,7 @@ class GoogleMapsApi:
                 "status": 11001
                 }
 
-    def get_photo(self, photo_reference:str) -> str:
+    def get_photo(self, photo_reference:str) -> dict:
         try:
             response = self.client.places_photo(photo_reference=photo_reference, max_width=400, max_height=400)
             return {

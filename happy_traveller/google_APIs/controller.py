@@ -1,11 +1,13 @@
 from happy_traveller.mixins import *
 from services import GoogleMapsApi
+from messages import Messages
 import random, time
 
 
-class API_Controller(GoogleMapsApi):
-    def __init__(self, search_location:str='') -> None:
-        self.search_location = search_location
+class API_Controller(GoogleMapsApi, Messages):
+    def __init__(self, request) -> None:
+        super().__init__()
+        self.request = request
 
 
     def find_place_by_text(self, text_input:str=''):

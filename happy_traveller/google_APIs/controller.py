@@ -1,10 +1,10 @@
 from happy_traveller.mixins import *
 from services import GoogleMapsApi
-from messages import Messages
+from messages import GoogleMapsMessages
 import random, time
 
 
-class API_Controller(GoogleMapsApi, Messages):
+class API_Controller(GoogleMapsApi, GoogleMapsMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request
@@ -16,19 +16,19 @@ class API_Controller(GoogleMapsApi, Messages):
         if service['status'] == 200:
             return service['results']
         elif service['status'] == 204:
-            return
+            return self.no_results_for_search()
         elif service['status'] == 404:
-            return
+            return self.no_found()
         elif service['status'] == 400:
-            return
+            return self.invalid_request()
         elif service['status'] == 429:
-            return
+            return self.over_query_limit()
         elif service['status'] == 403:
-            return
+            return self.request_denied()
         elif service['status'] == 417:
-            return
+            return self.unknown_error()
         elif service['status'] == 11001:
-            return
+            return self.no_internet_connection()
         else:
             return
 
@@ -38,19 +38,19 @@ class API_Controller(GoogleMapsApi, Messages):
         if service['status'] == 200:
             return service['results']
         elif service['status'] == 204:
-            return
+            return self.no_results()
         elif service['status'] == 404:
-            return
+            return self.no_found()
         elif service['status'] == 400:
-            return
+            return self.invalid_request()
         elif service['status'] == 429:
-            return
+            return self.over_query_limit()
         elif service['status'] == 403:
-            return
+            return self.request_denied()
         elif service['status'] == 417:
-            return
+            return self.unknown_error()
         elif service['status'] == 11001:
-            return
+            return self.no_internet_connection()
         else:
             return
         
@@ -61,19 +61,19 @@ class API_Controller(GoogleMapsApi, Messages):
         if service['status'] == 200:
             return service['results']
         elif service['status'] == 204:
-            return
+            return self.no_results()
         elif service['status'] == 404:
-            return
+            return self.no_found()
         elif service['status'] == 400:
-            return
+            return self.invalid_request()
         elif service['status'] == 429:
-            return
+            return self.over_query_limit()
         elif service['status'] == 403:
-            return
+            return self.request_denied()
         elif service['status'] == 417:
-            return
+            return self.unknown_error()
         elif service['status'] == 11001:
-            return
+            return self.no_internet_connection()
         else:
             return
 
@@ -83,19 +83,19 @@ class API_Controller(GoogleMapsApi, Messages):
         if service['status'] == 200:
             return service['results']
         elif service['status'] == 204:
-            return
+            return self.no_results()
         elif service['status'] == 404:
-            return
+            return self.no_found()
         elif service['status'] == 400:
-            return
+            return self.invalid_request()
         elif service['status'] == 429:
-            return
+            return self.over_query_limit()
         elif service['status'] == 403:
-            return
+            return self.request_denied()
         elif service['status'] == 417:
-            return
+            return self.unknown_error()
         elif service['status'] == 11001:
-            return
+            return self.no_internet_connection()
         else:
             return
 
@@ -104,20 +104,18 @@ class API_Controller(GoogleMapsApi, Messages):
 
         if service['status'] == 200:
             return service['results']
-        elif service['status'] == 204:
-            return
         elif service['status'] == 404:
-            return
+            return self.no_found()
         elif service['status'] == 400:
-            return
+            return self.invalid_request()
         elif service['status'] == 429:
-            return
+            return self.over_query_limit()
         elif service['status'] == 403:
-            return
+            return self.request_denied()
         elif service['status'] == 417:
-            return
+            return self.unknown_error()
         elif service['status'] == 11001:
-            return
+            return self.no_internet_connection()
         else:
             return
 

@@ -1,6 +1,6 @@
 from django.contrib import messages
 
-class Messages(messages):
+class GoogleMapsMessages(messages):
     def __init__(self, request) -> None:
         super().__init__()
         self.message = messages
@@ -8,6 +8,9 @@ class Messages(messages):
 
     def no_results_for_search(self):
         return self.message.info(self.request, message='No results for this search.')
+
+    def no_results(self):
+        return self.message.info(self.request, message='No results for this place')
 
     def no_found(self):
         return self.message.error(self.request, message='Page not found.')

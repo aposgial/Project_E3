@@ -54,6 +54,10 @@ def get_countries() -> list:
         countries_and_cities:dict = json.load(fp=f)
     return list(countries_and_cities.keys())
 
+# generate a random number
+def random_number() -> int:
+	return random.randint(0,1000)
+
 # select a random value from a list
 def random_pick(input_list:list) -> str:
 	if input_list:

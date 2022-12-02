@@ -14,7 +14,7 @@ class GoogleMapsApi:
                 if response['status'] == 'OK':
                     return {
                         "status": 200,
-                        "results": response['results']
+                        "results": response['result']
                         }
                 else:
                     return {
@@ -102,7 +102,7 @@ class GoogleMapsApi:
             if response['status'] == 'OK':
                 return {
                     "status": 200,
-                    "results": response['candidates'][0]
+                    "results": response['candidates'][0]['place_id']
                     }
             else:
                 return {
@@ -183,9 +183,9 @@ class GoogleMapsApi:
                 "status": 11001
                 }
 
-    def get_photo(self, photo_reference:str) -> dict:
+    def get_photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
         try:
-            response = self.client.places_photo(photo_reference=photo_reference, max_width=400, max_height=400)
+            response = self.client.places_photo(photo_reference=photo_reference, max_width=width, max_height=height)
             return {
                     "status": 200,
                     "results": response

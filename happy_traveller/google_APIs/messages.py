@@ -7,13 +7,13 @@ class GoogleMapsMessages(messages):
         self.request = request
 
     def success(self):
-        return self.message.success(self.request, message='The request succeeded')
+        return self.message.success(self.request, message='The request succeeded.')
 
     def no_results_for_search(self):
         return self.message.info(self.request, message='No results for this search.')
 
     def no_results(self):
-        return self.message.info(self.request, message='No results for this place')
+        return self.message.info(self.request, message='No results for this place.')
 
     def no_found(self):
         return self.message.error(self.request, message='Page not found.')
@@ -31,4 +31,7 @@ class GoogleMapsMessages(messages):
         return self.message.error(self.request, message='Something gone wrong.')
 
     def no_internet_connection(self):
-        return self.message.error(self.request, message='No internet connection')
+        return self.message.error(self.request, message='No internet connection.')
+
+    def no_country_found(self):
+        return self.message.error(self.request, message='Can not pick a random country.')

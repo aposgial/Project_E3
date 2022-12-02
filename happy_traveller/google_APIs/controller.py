@@ -10,7 +10,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         self.request = request
 
 
-    def find_place_by_text(self, text_input:str=''):
+    def _place_id_by_text(self, text_input:str='') -> dict:
         service = self.get_place_id_by_text(text_input)
 
         if service['status'] == 200:
@@ -40,7 +40,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
 
-    def place(self, place_id:str=''):
+    def _place(self, place_id:str='') -> dict:
         service = self.get_place(place_id)
 
         if service['status'] == 200:
@@ -70,8 +70,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
         
-
-    def places(self, query:str=''):
+    def _places(self, query:str='') -> dict:
         service = self.get_places(query)
 
         if service['status'] == 200:
@@ -101,7 +100,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
 
-    def near_by_places(self, location:str, radius=1000, type:str=''):
+    def _near_by_places(self, location:str, radius=1000, type:str='') -> dict:
         service = self.get_near_by_places(location, radius, type)
 
         if service['status'] == 200:
@@ -131,7 +130,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
 
-    def photo(self, photo_reference:str):
+    def _photo(self, photo_reference:str) -> dict:
         service = self.get_photo(photo_reference)
 
         if service['status'] == 200:
@@ -159,56 +158,89 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
             return
 
 
-    def download_photo(self, photo_reference:str) -> str:
-        try:
-            photo_name = 'photo{}.jpg'.format(str(random.randint(0,1000)))
+    def _download_photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
+        photo:dict = self._photo(photo_reference=photo_reference, width=width, height=height)
 
-            finall_photo = self.client.places_photo(photo_reference=photo_reference, max_width=400, max_height=400)
+        if photo['status'] == 200:
+            photo_name = 'photo{}.jpg'.format(str(random_number()))
+
             with open('static/photos/{}'.format(photo_name), 'wb') as f:
-                for chunk in finall_photo:
+                for chunk in photo['results']:
                     if chunk:
                         f.write(chunk)
-            return photo_name
-        except Exception as e:
-            print(e)
-            return ''
+                photo.update({"results":photo_name})
+                return photo
+        else:
+            return photo
 
-    def download_photo_from_all_places(self, places:list) -> list:
+    def _download_photo_from_all_places(self, places:list, width:int=400, height:int=400) -> list:
         for index, place in enumerate(places):
             try:
-                photo = place['photos'][0]['photo_reference']
-                photo_name = self.get_photo(photo_reference=photo)
-                if photo_name:
-                    place['photo_name'] = photo_name
+                photo_reference = place['photos'][0]['photo_reference']
+                photo = self._download_photo(photo_reference=photo_reference, width=width, height=height)
+
+                if photo['status'] == 200:
+                    place['photo_name'] = photo['results']
             except KeyError:
                 places.pop(index)
         return places
             
-
-    def download_photos_from_place(self, photos:list) -> list:
+    def _download_photos_from_place(self, photos:list) -> list:
         photos_names = []
         for photo in photos:
-            photo_name = self.get_photo(photo_reference=photo['photo_reference'])
-            if photo_name:
-                photos_names.append(photo_name)
+            temp = self._download_photo(photo_reference=photo['photo_reference'])
+            
+            if temp['status'] == 200:
+                photos_names.append(temp['results'])
         return photos_names
 
 
-
-    def get_place_by_search(self, search_input:str='') -> dict:
-        if search_input:
-            try:
-                place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
-                return self.get_place(place_id=place_id)
-            except:
-                return {}
-        else:
-            return {}
-
+    def place(self, place_id:str='') -> dict:
+        result = self._place(place_id=place_id)
         
-    def get_random_country_places(self, type:str='') -> list:
+        if result['status'] == 200 and "photos" in result['results']:
+            result['results']['photos_names'] = self._download_photos_from_place(photos=result['results']['photos'])
+            return result
+        else:
+            return result
+
+    def places(self, query:str='') -> dict:
+        result = self._places(query=query)
+
+        if result['status'] == 200:
+            temp =  self._download_photo_from_all_places(places=result['results'])
+            result['results'] = temp
+            return result
+        else:
+            return result
+
+    def find_place(self, text_input:str='') -> dict:
+        result = self._place_id_by_text(text_input=text_input)
+
+        if result['status'] == 200:
+            return self.place(place_id=result['results'])
+        else:
+            return result
+
+    def near_by_places(self, location:str, radius=1000, type:str='') -> dict:
+        result = self._near_by_places(location=location, radius=radius, type=type)
+    
+        if result['status'] == 200:
+            temp =  self._download_photo_from_all_places(places=result['results'])
+            result['results'] = temp
+            return result
+        else:
+            return result
+
+
+    def random_country_places(self, type:str='') -> dict:
         country = get_random_country()
         if country:
-            return self.get_places(type=type, country=country)
+            query = type + ' ' + country
+            return self.places(query=query)
         else:
-            return []
+            return {
+                "status": 204,
+                "message": self.no_country_found()
+            }
+        

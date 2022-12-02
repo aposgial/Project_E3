@@ -7,7 +7,7 @@ class Controller(Messeges):
         self.google_maps_controller = API_Controller(request=request)
 
     
-    def get_tag_search(self, tag:str):
+    def get_tag_search(self, tag:str) -> dict:
         value:str = self.request.GET.get(tag)
 
         if value:
@@ -22,7 +22,7 @@ class Controller(Messeges):
                 "message": self.empty_search()
             }
 
-    def get_tag_more_info(self, tag:str):
+    def get_tag_more_info(self, tag:str) -> dict:
         value:str = self.request.GET.get(tag)
 
         if value:

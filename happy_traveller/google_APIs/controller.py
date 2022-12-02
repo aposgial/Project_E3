@@ -8,6 +8,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request
+        self.samples = 3
 
 
     def _place_id_by_text(self, text_input:str='') -> dict:
@@ -187,7 +188,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
             
     def _download_photos_from_place(self, photos:list) -> list:
         photos_names = []
-        for photo in photos:
+        for photo in photos[:self.samples]:
             temp = self._download_photo(photo_reference=photo['photo_reference'])
             
             if temp['status'] == 200:
@@ -208,7 +209,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         result = self._places(query=query)
 
         if result['status'] == 200:
-            temp =  self._download_photo_from_all_places(places=result['results'])
+            temp =  self._download_photo_from_all_places(places=result['results'][:self.samples])
             result['results'] = temp
             return result
         else:
@@ -226,7 +227,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         result = self._near_by_places(location=location, radius=radius, type=type)
     
         if result['status'] == 200:
-            temp =  self._download_photo_from_all_places(places=result['results'])
+            temp =  self._download_photo_from_all_places(places=result['results'][:self.samples])
             result['results'] = temp
             return result
         else:

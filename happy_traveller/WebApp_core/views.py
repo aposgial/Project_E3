@@ -1,46 +1,38 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from google_APIs.controller import API_Controller
+from controller import Controller
 from happy_traveller.mixins import get_random_country
 
 # Create your views here.
 def home(request):
-    api = API_Controller()
+    api = API_Controller(request=request)
+    controller = Controller(request=request)
     country = get_random_country()
-    samples = 3
+    api.samples = 3
     context = {}
 
     if request.method == 'GET':
-        search = request.GET.get('search')
-        place_id_more_info = request.GET.get('more_info')
+        search = controller.get_tag_search(tag='search')
+        place_id_more_info = controller.get_tag_more_info(tag='more_info')
         #option = request.GET.get('flexRadioDefault')
 
-        if search:
-            result = api.get_place_by_search(search_input=search)
-            if 'photos' in result:
-                temp = api.get_photos_from_place(photos=result['photos'][:samples])
-            else:
-                temp = []
-            result['photos_names'] = temp
+        if search['status'] == 200:
+            result = api.find_place(text_input=search['result'])
             return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
-        if place_id_more_info:
-            result = api.get_place(place_id=(place_id_more_info))
-            if 'photos' in result:
-                temp = api.get_photos_from_place(photos=result['photos'][:samples])
-            else:
-                temp = []
-            result['photos_names'] = temp
+        if place_id_more_info['status'] == 200:
+            result = api.place(place_id=place_id_more_info['result'])
             return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
-    places = api.get_places(type='tourist_attraction', country=country)[:samples]
-    tourist_attraction = api.get_photo_from_all_places(places)
+    query = country + ' tourist_attraction'
+    tourist_attraction = api.places(query=query)
     
-    places = api.get_places(type='museum', country=country)[:samples]
-    museum = api.get_photo_from_all_places(places)
+    query = country + ' museum'
+    museum = api.places(query=query)
     
-    places = api.get_places(type='park', country=country)[:samples]
-    park = api.get_photo_from_all_places(places)
+    query = country + ' park'
+    park = api.places(query=query)
 
     context = {
         "country": country,

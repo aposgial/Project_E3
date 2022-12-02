@@ -5,34 +5,29 @@ from happy_traveller.mixins import reCAPTCHAValidation
 from django.contrib.auth.models import User
 from happy_traveller.mixins import *
 from google_APIs.controller import API_Controller
+from WebApp_core.controller import Controller
 from django.conf import settings
 from .forms import *
 
 
 @login_required(login_url='signin')
 def account(request):
-    api = API_Controller()
-    samples = 3
+    api = API_Controller(request=request)
+    controller = Controller(request=request)
+    location = get_current_location()['loc']
+    api.samples = 3
     context = {}
-    place_id_more_info = request.GET.get('more_info')
+    place_id_more_info = controller.get_tag_more_info(tag='more_info')
     
-    if place_id_more_info:
-        result = api.get_place(place_id=(place_id_more_info))
-        if 'photos' in result:
-            temp = api.get_photos_from_place(photos=result['photos'][:samples])
-        else:
-            temp = []
-        result['photos_names'] = temp
+    if place_id_more_info['status'] == 200:
+        result = api.place(place_id=place_id_more_info['result'])
         return render(request, 'WebApp_core/place_details.html', context={"result":result})
 
-    places = api.get_near_by_places(type='hotel')[:samples]
-    hotel = api.get_photo_from_all_places(places)
+    hotel = api.near_by_places(location=location, type='hotel')
 
-    places = api.get_near_by_places(type='cafe')[:samples]
-    cafe = api.get_photo_from_all_places(places)
+    cafe = api.near_by_places(location=location, type='cafe')
 
-    places = api.get_near_by_places(type='bar')[:samples]
-    bar = api.get_photo_from_all_places(places)
+    bar = api.near_by_places(location=location, type='bar')
 
     context = {
         "hotel": hotel,

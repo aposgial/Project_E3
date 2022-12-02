@@ -27,7 +27,6 @@ def home(request):
 
     query = country + ' tourist_attraction'
     tourist_attraction = api.places(query=query)
-    print(tourist_attraction)
     
     query = country + ' museum'
     museum = api.places(query=query)

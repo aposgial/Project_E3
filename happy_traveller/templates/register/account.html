@@ -61,7 +61,7 @@
         {% if hotel %}
         <h3>Top hotels</h3>
         <br>
-        {% include 'partials/cards.html' with results=hotel %}
+        {% include 'partials/cards.html' with results=hotel.results %}
         {% endif %}
         
         <br>
@@ -70,7 +70,7 @@
         {% if cafe %}
         <h3>Top cafe</h3>
         <br>
-        {% include 'partials/cards.html' with results=cafe %}
+        {% include 'partials/cards.html' with results=cafe.results %}
         {% endif %}
 
         <br>
@@ -79,7 +79,7 @@
         {% if bar %}
         <h3>Top bars</h3>
         <br>
-        {% include 'partials/cards.html' with results=bar %}
+        {% include 'partials/cards.html' with results=bar.results %}
         {% endif %}
     </div>
 {% endblock %}

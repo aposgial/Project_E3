@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from google_APIs.controller import API_Controller
-from controller import Controller
+from WebApp_core.controller import Controller
 from happy_traveller.mixins import get_random_country
 
 # Create your views here.
@@ -27,6 +27,7 @@ def home(request):
 
     query = country + ' tourist_attraction'
     tourist_attraction = api.places(query=query)
+    print(tourist_attraction)
     
     query = country + ' museum'
     museum = api.places(query=query)

@@ -1,5 +1,5 @@
 from google_APIs.controller import API_Controller
-from messages import Messeges
+from WebApp_core.messages import Messeges
 
 class Controller(Messeges):
     def __init__(self, request) -> None:

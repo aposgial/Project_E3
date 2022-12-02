@@ -1,6 +1,6 @@
 from happy_traveller.mixins import *
-from services import GoogleMapsApi
-from messages import GoogleMapsMessages
+from google_APIs.services import GoogleMapsApi
+from google_APIs.messages import GoogleMapsMessages
 import random, time
 
 
@@ -131,8 +131,8 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
 
-    def _photo(self, photo_reference:str) -> dict:
-        service = self.get_photo(photo_reference)
+    def _photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
+        service = self.get_photo(photo_reference, width=width, height=height)
 
         if service['status'] == 200:
             service['message'] = self.success()
@@ -210,7 +210,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
 
         if result['status'] == 200:
             temp =  self._download_photo_from_all_places(places=result['results'][:self.samples])
-            result['results'] = temp
+            result.update({"results": temp})
             return result
         else:
             return result

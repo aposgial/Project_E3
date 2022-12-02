@@ -6,6 +6,9 @@ class GoogleMapsMessages(messages):
         self.message = messages
         self.request = request
 
+    def success(self):
+        return self.message.success(self.request, message='The request succeeded')
+
     def no_results_for_search(self):
         return self.message.info(self.request, message='No results for this search.')
 

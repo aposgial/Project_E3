@@ -14,21 +14,29 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         service = self.get_place_id_by_text(text_input)
 
         if service['status'] == 200:
-            return service['results']
+            service['message'] = self.success()
+            return service
         elif service['status'] == 204:
-            return self.no_results_for_search()
+            service['message'] = self.no_results_for_search()
+            return service
         elif service['status'] == 404:
-            return self.no_found()
+            service['message'] = self.no_found()
+            return service
         elif service['status'] == 400:
-            return self.invalid_request()
+            service['message'] = self.invalid_request()
+            return service
         elif service['status'] == 429:
-            return self.over_query_limit()
+            service['message'] = self.over_query_limit()
+            return service
         elif service['status'] == 403:
-            return self.request_denied()
+            service['message'] = self.request_denied()
+            return service
         elif service['status'] == 417:
-            return self.unknown_error()
+            service['message'] = self.unknown_error()
+            return service
         elif service['status'] == 11001:
-            return self.no_internet_connection()
+            service['message'] = self.no_internet_connection()
+            return service
         else:
             return
 
@@ -36,21 +44,29 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         service = self.get_place(place_id)
 
         if service['status'] == 200:
-            return service['results']
+            service['message'] = self.success()
+            return service
         elif service['status'] == 204:
-            return self.no_results()
+            service['message'] = self.no_results()
+            return service
         elif service['status'] == 404:
-            return self.no_found()
+            service['message'] = self.no_found()
+            return service
         elif service['status'] == 400:
-            return self.invalid_request()
+            service['message'] = self.invalid_request()
+            return service
         elif service['status'] == 429:
-            return self.over_query_limit()
+            service['message'] = self.over_query_limit()
+            return service
         elif service['status'] == 403:
-            return self.request_denied()
+            service['message'] = self.request_denied()
+            return service
         elif service['status'] == 417:
-            return self.unknown_error()
+            service['message'] = self.unknown_error()
+            return service
         elif service['status'] == 11001:
-            return self.no_internet_connection()
+            service['message'] = self.no_internet_connection()
+            return service
         else:
             return
         
@@ -59,21 +75,29 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         service = self.get_places(query)
 
         if service['status'] == 200:
-            return service['results']
+            service['message'] = self.success()
+            return service
         elif service['status'] == 204:
-            return self.no_results()
+            service['message'] = self.no_results()
+            return service
         elif service['status'] == 404:
-            return self.no_found()
+            service['message'] = self.no_found()
+            return service
         elif service['status'] == 400:
-            return self.invalid_request()
+            service['message'] = self.invalid_request()
+            return service
         elif service['status'] == 429:
-            return self.over_query_limit()
+            service['message'] = self.over_query_limit()
+            return service
         elif service['status'] == 403:
-            return self.request_denied()
+            service['message'] = self.request_denied()
+            return service
         elif service['status'] == 417:
-            return self.unknown_error()
+            service['message'] = self.unknown_error()
+            return service
         elif service['status'] == 11001:
-            return self.no_internet_connection()
+            service['message'] = self.no_internet_connection()
+            return service
         else:
             return
 
@@ -81,21 +105,29 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         service = self.get_near_by_places(location, radius, type)
 
         if service['status'] == 200:
-            return service['results']
+            service['message'] = self.success()
+            return service
         elif service['status'] == 204:
-            return self.no_results()
+            service['message'] = self.no_results()
+            return service
         elif service['status'] == 404:
-            return self.no_found()
+            service['message'] = self.no_found()
+            return service
         elif service['status'] == 400:
-            return self.invalid_request()
+            service['message'] = self.invalid_request()
+            return service
         elif service['status'] == 429:
-            return self.over_query_limit()
+            service['message'] = self.over_query_limit()
+            return service
         elif service['status'] == 403:
-            return self.request_denied()
+            service['message'] = self.request_denied()
+            return service
         elif service['status'] == 417:
-            return self.unknown_error()
+            service['message'] = self.unknown_error()
+            return service
         elif service['status'] == 11001:
-            return self.no_internet_connection()
+            service['message'] = self.no_internet_connection()
+            return service
         else:
             return
 
@@ -103,19 +135,26 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
         service = self.get_photo(photo_reference)
 
         if service['status'] == 200:
-            return service['results']
+            service['message'] = self.success()
+            return service
         elif service['status'] == 404:
-            return self.no_found()
+            service['message'] = self.no_found()
+            return service
         elif service['status'] == 400:
-            return self.invalid_request()
+            service['message'] = self.invalid_request()
+            return service
         elif service['status'] == 429:
-            return self.over_query_limit()
+            service['message'] = self.over_query_limit()
+            return service
         elif service['status'] == 403:
-            return self.request_denied()
+            service['message'] = self.request_denied()
+            return service
         elif service['status'] == 417:
-            return self.unknown_error()
+            service['message'] = self.unknown_error()
+            return service
         elif service['status'] == 11001:
-            return self.no_internet_connection()
+            service['message'] = self.no_internet_connection()
+            return service
         else:
             return
 

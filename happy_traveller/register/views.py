@@ -3,13 +3,38 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from happy_traveller.mixins import reCAPTCHAValidation
 from django.contrib.auth.models import User
+from happy_traveller.mixins import *
+from google_APIs.controller import API_Controller
+from WebApp_core.controller import Controller
 from django.conf import settings
 from .forms import *
 
 
 @login_required(login_url='signin')
 def account(request):
-    return render(request, 'register/account.html')
+    api = API_Controller(request=request)
+    controller = Controller(request=request)
+    location = get_current_location()['loc']
+    api.samples = 3
+    context = {}
+    place_id_more_info = controller.get_tag_more_info(tag='more_info')
+    
+    if place_id_more_info['status'] == 200:
+        result = api.place(place_id=place_id_more_info['result'])
+        return render(request, 'WebApp_core/place_details.html', context={"result":result})
+
+    hotel = api.near_by_places(location=location, type='hotel')
+
+    cafe = api.near_by_places(location=location, type='cafe')
+
+    bar = api.near_by_places(location=location, type='bar')
+
+    context = {
+        "hotel": hotel,
+        "cafe": cafe,
+        "bar": bar
+        }
+    return render(request, 'register/account.html', context=context)
 
 
 @login_required(login_url='signin')

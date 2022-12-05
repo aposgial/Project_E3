@@ -2,112 +2,51 @@
 {% load static %}
 
 {% block content %}
-  <center>
-    <br>
-    <div class="container">
-      <form id="searchbar" method="get" action="">
-          <div class="mb-3 w-25">
-              <label for="username" class="form-label">Search place</label>
-              <input type="search" name="search" class="form-control me-2">
-          </div>
-          
-          <div class="form-check mb-3 w-25">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="city">
-            <label class="form-check-label" for="flexRadioDefault1">
-              City
-            </label>
-          </div>
-          <div class="form-check mb-3 w-25">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="place" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Place
-            </label>
-          </div>
+    <div style="margin: auto;width: 65%;padding: 10px;">
+        <center>
+            <br>
+            <div class="card bg-dark text-white">
+                <img src="https://i.pinimg.com/originals/b5/09/ed/b509ed5f657b87def2424e990badd2d6.jpg" class="card-img">
+                <div class="card-img-overlay">
+                    <form id="searchbar" method="get" action="">
+                        <br><br><br><br><br><br><br><br>
+                        <div class="mb-3 w-25">
+                            <input type="search" name="search" class="form-control me-2">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </center>
+        
+        <hr>
+        <br>
+        {% if tourist_attraction %}
+            <h3>Top tourist attractions for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=tourist_attraction.results %}
+            <br>
+            <br>
+        {% endif %}
 
-          <button type="submit" class="btn btn-primary">Search</button>
-      </form>
+        <br>
+
+        {% if museum %}
+            <h3>Most famous museums for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=museum.results %}
+            <br>
+            <br>
+        {% endif %}
+
+        {% if park %}
+            <h3>Most parks for {{ country }}</h3>
+            <br>
+            {% include 'partials/cards.html' with results=park.results %}
+            <br>
+            <br>
+        {% endif %}
     </div>
-  </center> 
-
-
-{% if search %}
-  <center> <h3>Photo Album</h3> </center>
-  <br>
-
-  {% for result in results %}
-    <center>
-      <p> {{result.name}} </p>
-      <p> {{result.formatted_address}} </p>
-      <p> {{result.loclat}} </p>
-      <p> {{result.loclng}} </p>
-      <p> {{result.open_now}} </p>
-      <p> {{result.rating}} </p>
-
-      {% with 'photos/'|add:result.photo_name as image_static %}
-        <img src="{% static image_static %}" width="200" height="200" class="img-thumbnail" >
-      {% endwith %}
-
-      
-    </center>
-
-  {% endfor %}
-  <!--<div class="container">
-      <center>
-      <p> {{result.name}} </p>
-      <p> {{result.address}} </p>
-      <p> {{result.loclat}} </p>
-      <p> {{result.loclng}} </p>
-      <p> {{result.open_now}} </p>
-      <p> {{result.rating}} </p>
-      <div class="row">
-      </center>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo0.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div> 
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo1.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-          <p>fwto prwti</p>
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo2.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-          <p>fwto 2</p>
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo3.jpg' %}" width="200" height="200" class="img-thumbnail" >  
-          <p>dokimi3</p>
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo4.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo5.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-        
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo6.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo7.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo8.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-        <div class="col-sm-4">
-          <img src="{% static 'photos/photo9.jpg' %}" width="200" height="200" class="img-thumbnail" > 
-        </div>
-
-
-      </div>
-  </div>-->
-  {% endif %}
 {% endblock %}
 
 

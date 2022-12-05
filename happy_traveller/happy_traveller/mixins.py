@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from urllib.parse import urlencode
 from urllib.request import urlopen
-import requests, json
+import requests, json,random
 
 
 #Handles form errors that are passed back to AJAX calls
@@ -42,8 +42,6 @@ def get_current_location() -> dict:
 		return json.load(response)
 	except:
 		return {}
-<<<<<<< HEAD
-=======
 
 
 def get_place_types() -> list:
@@ -71,4 +69,3 @@ def random_pick(input_list:list) -> str:
 def get_random_country() -> str:
     return random_pick(input_list=get_countries())
 
->>>>>>> 849dd0f7210add87be96d039d57832e6348ea89a

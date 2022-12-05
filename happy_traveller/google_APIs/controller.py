@@ -108,9 +108,6 @@ class API_Controller():
             return []
 
 
-<<<<<<< HEAD
-    def get_places(self, type:str='', country:str=''):
-=======
     def get_place(self, place_id:str='') -> dict:
         if place_id:
             try:
@@ -137,7 +134,6 @@ class API_Controller():
 
     
     def get_places(self, type:str='', country:str='') -> list:
->>>>>>> 8f3c5f2fbce3de9b773c2902857ae437ee971f11
         query = type + ' ' + country
         if query:
             response = self.client.places(query=query)
@@ -147,9 +143,4 @@ class API_Controller():
                 return []
         else:
             return []
-<<<<<<< HEAD
-
-
-=======
             
->>>>>>> 8f3c5f2fbce3de9b773c2902857ae437ee971f11

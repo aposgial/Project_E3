@@ -29,7 +29,6 @@ class FlickrApi:
             elif response['stat'] == 'ok' and response['total'] == 0:
                 return {
                     "status": 204,
-                    "message": 'no resulrs found'
                 }
             else:
                 return {

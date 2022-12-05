@@ -18,7 +18,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
             service['message'] = self.success()
             return service
         elif service['status'] == 204:
-            service['message'] = self.no_results_for_search()
+            service['message'] = self.no_results_for_place()
             return service
         elif service['status'] == 404:
             service['message'] = self.no_found()

@@ -1,17 +1,25 @@
 from django.contrib import messages
 
-class GoogleMapsMessages:
+class FlickrMessages:
     def __init__(self, request) -> None:
         self.request = request
+    
+
+    def flickr_message_error(self, message:str=''):
+        return messages.error(self.request, message=message)
+
+    def flickr_message_warning(self, message:str=''):
+        return messages.warning(self.request, message=message)
+
+    def flickr_message_info(self, message:str=''):
+        return messages.info(self.request, message=message)
+    
 
     def success(self):
-        return messages.success(self.request, message='The request succeeded.')
+        return messages.info(self.request, message='The data retrieved successfully')
 
-    def no_results_for_place(self):
+    def no_results_for_search(self):
         return messages.info(self.request, message='No results for this search.')
-
-    def no_results(self):
-        return messages.info(self.request, message='No results for this place.')
 
     def no_found(self):
         return messages.error(self.request, message='Page not found.')
@@ -30,6 +38,3 @@ class GoogleMapsMessages:
 
     def no_internet_connection(self):
         return messages.error(self.request, message='No internet connection.')
-
-    def no_country_found(self):
-        return messages.error(self.request, message='Can not pick a random country.')

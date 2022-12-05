@@ -4,3 +4,11 @@
     --dark: #0e10101;
     --trans: all 0.3s ease-in-out;
 }
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--green);
+    padding: 1rem 0;
+    z-index: 999;
+}

@@ -2,7 +2,11 @@ from django.conf import settings
 from django.shortcuts import redirect
 from urllib.parse import urlencode
 from urllib.request import urlopen
+<<<<<<< HEAD
+import requests, json, random
+=======
 import requests, json,random
+>>>>>>> 478f4acd162b961b767b619b56a26ba4bf7d818d
 
 
 #Handles form errors that are passed back to AJAX calls

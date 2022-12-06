@@ -80,7 +80,7 @@ class FlickrApiController(FlickrApi, FlickrMessages):
             return
 
     
-    def total_place_photos(self, text_input:str='',accuracy:int=3) -> int:
+    def total_place_photos(self, text_input:str='',accuracy:int=3) -> dict:
         sum_photos:int = 0
         for loop in range(accuracy):
             photos = self.place_by_search(text_input)
@@ -89,12 +89,12 @@ class FlickrApiController(FlickrApi, FlickrMessages):
         
         return sum_photos // accuracy
 
-    def most_famous_place(self, text_input:str='', city:bool=False, accuracy:int=3):
+    def most_famous_place(self, city:bool=False, accuracy:int=3) -> str:
         if city:
             self.place_type = 11
 
         places_total_photos:list = []
-        countries = get_countries()
+        countries = get_countries()[:10]
         for place in countries:
             total_photos:int = self.total_place_photos(text_input=str(place), accuracy=accuracy)
             places_total_photos.append(total_photos)

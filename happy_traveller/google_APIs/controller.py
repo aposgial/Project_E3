@@ -43,6 +43,7 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
 
     def _place(self, place_id:str='') -> dict:
         service = self.get_place(place_id)
+        
 
         if service['status'] == 200:
             service['message'] = self.success()

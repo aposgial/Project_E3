@@ -1,5 +1,6 @@
 from flickr_API.services import FlickrApi
 from flickr_API.messages import FlickrMessages
+from happy_traveller.mixins import get_countries
 
 class FlickrApiController(FlickrApi, FlickrMessages):
     def __init__(self, request) -> None:
@@ -7,7 +8,7 @@ class FlickrApiController(FlickrApi, FlickrMessages):
         self.request = request
 
 
-    def _place_by_search(self, text_input:str=''):
+    def place_by_search(self, text_input:str=''):
         service = self.get_place_by_search(text_input)
 
         if service['status'] == 200:
@@ -77,3 +78,27 @@ class FlickrApiController(FlickrApi, FlickrMessages):
             return service
         else:
             return
+
+    
+    def total_place_photos(self, text_input:str='',accuracy:int=3) -> int:
+        sum_photos:int = 0
+        for loop in range(accuracy):
+            photos = self.place_by_search(text_input)
+            if photos['status'] == 200:
+                sum_photos =+ int(photos['results']['total'])
+        
+        return sum_photos // accuracy
+
+    def most_famous_place(self, text_input:str='', city:bool=False, accuracy:int=3):
+        if city:
+            self.place_type = 11
+
+        places_total_photos:list = []
+        countries = get_countries()
+        for place in countries:
+            total_photos:int = self.total_place_photos(text_input=str(place), accuracy=accuracy)
+            places_total_photos.append(total_photos)
+
+        index:int = places_total_photos.index(max(places_total_photos))
+        return countries[index]
+        

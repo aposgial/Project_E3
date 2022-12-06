@@ -6,7 +6,7 @@ class FlickrApi:
     def __init__(self) -> None:
         self.key = settings.FLICKR_API_KEY
         self.base_url = 'https://www.flickr.com/services/rest/?'
-        self.accuracy = 3
+        self.place_type = 3 #accuracy of place 3=Country 11=City
         self.expect = requests.exceptions
 
 
@@ -15,7 +15,7 @@ class FlickrApi:
             base_url = self.base_url,
             key = self.key,
             text = text_input,
-            accuracy = self.accuracy
+            accuracy = self.place_type
         )
 
         try:

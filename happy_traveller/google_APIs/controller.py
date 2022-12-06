@@ -159,10 +159,6 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
             return
 
 
-<<<<<<< HEAD
-    def get_place(self, place_id:str='') -> dict:
-        if place_id:
-=======
     def _download_photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
         photo:dict = self._photo(photo_reference=photo_reference, width=width, height=height)
 
@@ -180,36 +176,10 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
 
     def _download_photo_from_all_places(self, places:list, width:int=400, height:int=400) -> list:
         for index, place in enumerate(places):
->>>>>>> 964ed2c9bdf9bee2423f4523988ec5fe2b850f3b
             try:
                 photo_reference = place['photos'][0]['photo_reference']
                 photo = self._download_photo(photo_reference=photo_reference, width=width, height=height)
 
-<<<<<<< HEAD
-
-    def get_place_by_search(self, search_input:str='') -> dict:
-        if search_input:
-            try:
-                place_id = self.client.find_place(input=search_input, input_type='textquery')['candidates'][0]['place_id']
-                return self.get_place(place_id=place_id)
-            except:
-                return {}
-        else:
-            return {}
-
-    
-    def get_places(self, type:str='', country:str='') -> list:
-        query = type + ' ' + country
-        if query:
-            response = self.client.places(query=query)
-            if response['status'] == 'OK':
-                return response['results']
-            else:
-                return []
-        else:
-            return []
-            
-=======
                 if photo['status'] == 200:
                     place['photo_name'] = photo['results']
             except KeyError:
@@ -275,4 +245,3 @@ class API_Controller(GoogleMapsApi, GoogleMapsMessages):
                 "message": self.no_country_found()
             }
         
->>>>>>> 964ed2c9bdf9bee2423f4523988ec5fe2b850f3b

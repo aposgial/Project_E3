@@ -2,11 +2,10 @@ from flickr_API.services import FlickrApi
 from flickr_API.messages import FlickrMessages
 from happy_traveller.mixins import get_countries
 
-class FlickrApiController(FlickrApi, FlickrMessages):
+class FlickrController(FlickrApi, FlickrMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request
-
 
     def place_by_search(self, text_input:str=''):
         service = self.get_place_by_search(text_input)

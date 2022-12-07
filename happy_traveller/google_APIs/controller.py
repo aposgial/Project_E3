@@ -4,7 +4,7 @@ from google_APIs.messages import GoogleMapsMessages
 import random, time
 
 
-class API_Controller(GoogleMapsApi, GoogleMapsMessages):
+class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request

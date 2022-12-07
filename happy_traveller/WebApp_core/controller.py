@@ -1,10 +1,12 @@
-from google_APIs.controller import API_Controller
+from google_APIs.controller import GoogleMapsController
+from flickr_API.controller import FlickrController
 from WebApp_core.messages import Messeges
 
 class Controller(Messeges):
     def __init__(self, request) -> None:
         super().__init__(request)
-        self.google_maps_controller = API_Controller(request=request)
+        self.google_maps_controller = GoogleMapsController(request=request)
+        self.flickr_controller = FlickrController(request=request)
 
     
     def get_tag_search(self, tag:str) -> dict:

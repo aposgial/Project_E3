@@ -19,7 +19,7 @@ def account(request):
     
     if place_id_more_info['status'] == 200:
         result = controller.google_maps_controller.place(place_id=place_id_more_info['result'])
-        return render(request, 'WebApp_core/place_details.html', context={"result":result})
+        return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
     hotel = controller.google_maps_controller.near_by_places(location=location, type='hotel')
 

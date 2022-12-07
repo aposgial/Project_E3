@@ -1,14 +1,16 @@
 from happy_traveller.mixins import *
 from google_APIs.services import GoogleMapsApi
 from google_APIs.messages import GoogleMapsMessages
-import random, time
+from concurrent import futures
 
 
 class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request
-        self.samples = 3
+        self.samples = 10
+        self.photo_width = 400
+        self.photo_height = 400
 
 
     def _place_id_by_text(self, text_input:str='') -> dict:
@@ -131,8 +133,8 @@ class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
         else:
             return
 
-    def _photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
-        service = self.get_photo(photo_reference, width=width, height=height)
+    def _photo(self, photo_reference:str) -> dict:
+        service = self.get_photo(photo_reference, width=self.photo_width, height=self.photo_height)
 
         if service['status'] == 200:
             service['message'] = self.success()
@@ -159,8 +161,8 @@ class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
             return
 
 
-    def _download_photo(self, photo_reference:str, width:int=400, height:int=400) -> dict:
-        photo:dict = self._photo(photo_reference=photo_reference, width=width, height=height)
+    def _download_photo(self, photo_reference:str) -> dict:
+        photo:dict = self._photo(photo_reference=photo_reference)
 
         if photo['status'] == 200:
             photo_name = 'photo{}.jpg'.format(str(random_number()))
@@ -174,25 +176,37 @@ class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
         else:
             return photo
 
-    def _download_photo_from_all_places(self, places:list, width:int=400, height:int=400) -> list:
+    def _download_photo_from_all_places(self, places:list) -> list:
+        photos_references = []
         for index, place in enumerate(places):
             try:
-                photo_reference = place['photos'][0]['photo_reference']
-                photo = self._download_photo(photo_reference=photo_reference, width=width, height=height)
-
-                if photo['status'] == 200:
-                    place['photo_name'] = photo['results']
+                photos_references.append(place['photos'][0]['photo_reference'])
             except KeyError:
                 places.pop(index)
+
+        with futures.ThreadPoolExecutor(max_workers=10) as executor:
+            photos = executor.map(self._download_photo, photos_references)
+
+            for photo, place in zip(photos, places):
+                if photo['status'] == 200:
+                    place['photo_name'] = photo['results']
+
         return places
             
     def _download_photos_from_place(self, photos:list) -> list:
         photos_names = []
-        for photo in photos[:self.samples]:
-            temp = self._download_photo(photo_reference=photo['photo_reference'])
-            
-            if temp['status'] == 200:
-                photos_names.append(temp['results'])
+        photos_references = []
+
+        for photo in photos:
+            photos_references.append(photo['photo_reference'])
+
+        with futures.ThreadPoolExecutor(max_workers=10) as executor:
+            temp = executor.map(self._download_photo, photos_references)
+
+            for photo in temp:
+                if photo['status'] == 200:
+                    photos_names.append(photo['results'])
+
         return photos_names
 
 

@@ -21,12 +21,10 @@ def home(request):
 
         if search['status'] == 200:
             result = controller.google_maps_controller.find_place(text_input=search['result'])
-            print(result)
-            return render(request, 'WebApp_core/place_details.html', context={"result":result})
+            return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
         if place_id_more_info['status'] == 200:
             result = controller.google_maps_controller.place(place_id=place_id_more_info['result'])
-            print(result)
             return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
     query = country + ' tourist_attraction'

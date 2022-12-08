@@ -9,9 +9,9 @@ from happy_traveller.mixins import get_random_country
 def home(request):
     controller = Controller(request=request)
     country = get_random_country()
-    #country = flickr.most_famous_place()
+    controller.flickr_controller.most_famous_place()
     print(country)
-    controller.google_maps_controller.samples = 3
+    controller.google_maps_controller.samples = 1
     context = {}
 
     if request.method == 'GET':

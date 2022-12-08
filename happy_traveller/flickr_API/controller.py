@@ -1,11 +1,14 @@
 from flickr_API.services import FlickrApi
 from flickr_API.messages import FlickrMessages
 from happy_traveller.mixins import get_countries
+from concurrent import futures
 
 class FlickrController(FlickrApi, FlickrMessages):
     def __init__(self, request) -> None:
         super().__init__()
         self.request = request
+        self.accuracy:int = 3
+        self.threads:int = 10
 
     def place_by_search(self, text_input:str=''):
         service = self.get_place_by_search(text_input)
@@ -79,24 +82,27 @@ class FlickrController(FlickrApi, FlickrMessages):
             return
 
     
-    def total_place_photos(self, text_input:str='',accuracy:int=3) -> dict:
+    def total_place_photos(self, text_input:str='') -> dict:
         sum_photos:int = 0
-        for loop in range(accuracy):
+        for _ in range(self.accuracy):
             photos = self.place_by_search(text_input)
             if photos['status'] == 200:
                 sum_photos =+ int(photos['results']['total'])
         
-        return sum_photos // accuracy
+        return sum_photos // self.accuracy
 
-    def most_famous_place(self, city:bool=False, accuracy:int=3) -> str:
+    def most_famous_place(self, city:bool=False) -> str:
         if city:
             self.place_type = 11
 
-        places_total_photos:list = []
+        places_total_photos = []
         countries = get_countries()[:10]
-        for place in countries:
-            total_photos:int = self.total_place_photos(text_input=str(place), accuracy=accuracy)
-            places_total_photos.append(total_photos)
+        
+        with futures.ThreadPoolExecutor(max_workers=self.threads) as executor:
+            temp = executor.map(self.total_place_photos, countries)
+
+            for place_total_photos in temp:
+                places_total_photos.append(place_total_photos)
 
         index:int = places_total_photos.index(max(places_total_photos))
         return countries[index]

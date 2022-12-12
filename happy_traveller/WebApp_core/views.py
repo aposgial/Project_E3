@@ -8,10 +8,11 @@ from happy_traveller.mixins import get_random_country
 # Create your views here.
 def home(request):
     controller = Controller(request=request)
-    country = get_random_country()
-    controller.flickr_controller.most_famous_place()
+    #country = get_random_country()
+    country = 'New Zealand'
+    #controller.flickr_controller.most_famous_place()
     print(country)
-    controller.google_maps_controller.samples = 1
+    controller.google_maps_controller.samples = 2
     context = {}
 
     if request.method == 'GET':

@@ -1027,8 +1027,5 @@ class Test_ApiController(unittest.TestCase):
     def test__places(self):
         self.assertAlmostEqual("Paris","Paris")
 
-    #def test__near_by_places(self):
-        #self.assertAlmostEqual("")
-
 if __name__ == '__main__':
     unittest.main()

@@ -4,35 +4,28 @@ from django.contrib.auth import login, logout, authenticate
 from happy_traveller.mixins import reCAPTCHAValidation
 from django.contrib.auth.models import User
 from happy_traveller.mixins import *
-from google_APIs.controller import API_Controller
+from register.controller import Controller
 from django.conf import settings
 from .forms import *
 
 
 @login_required(login_url='signin')
 def account(request):
-    api = API_Controller()
-    samples = 3
+    controller = Controller(request=request)
+    location = get_current_location()['loc']
+    controller.google_maps_controller.samples = 3
     context = {}
-    place_id_more_info = request.GET.get('more_info')
+    place_id_more_info = controller.webapp_core_controller.get_tag_more_info(tag='more_info')
     
-    if place_id_more_info:
-        result = api.get_place(place_id=(place_id_more_info))
-        if 'photos' in result:
-            temp = api.get_photos_from_place(photos=result['photos'][:samples])
-        else:
-            temp = []
-        result['photos_names'] = temp
-        return render(request, 'WebApp_core/place_details.html', context={"result":result})
+    if place_id_more_info['status'] == 200:
+        result = controller.google_maps_controller.place(place_id=place_id_more_info['result'])
+        return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
-    places = api.get_near_by_places(type='hotel')[:samples]
-    hotel = api.get_photo_from_all_places(places)
+    hotel = controller.google_maps_controller.near_by_places(location=location, type='hotel')
 
-    places = api.get_near_by_places(type='cafe')[:samples]
-    cafe = api.get_photo_from_all_places(places)
+    cafe = controller.google_maps_controller.near_by_places(location=location, type='cafe')
 
-    places = api.get_near_by_places(type='bar')[:samples]
-    bar = api.get_photo_from_all_places(places)
+    bar = controller.google_maps_controller.near_by_places(location=location, type='bar')
 
     context = {
         "hotel": hotel,

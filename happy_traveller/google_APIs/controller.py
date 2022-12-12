@@ -1,6 +1,7 @@
 from happy_traveller.mixins import *
 from google_APIs.services import GoogleMapsApi
 from google_APIs.messages import GoogleMapsMessages
+from google_APIs.models import Place, PlacePhotos
 from concurrent import futures
 
 
@@ -183,13 +184,22 @@ class GoogleMapsController(GoogleMapsApi, GoogleMapsMessages):
                 photos_references.append(place['photos'][0]['photo_reference'])
             except KeyError:
                 places.pop(index)
+            else:
+                place_count = Place.objects.filter(place_id=str(place['place_id'])).count()
+                print(place_count)
+                if place_count != 0:
+                    place_obj = Place.objects.get(place_id=str(place['place_id']))
+                    place['photo_name'] = place_obj.base_photo
 
-        with futures.ThreadPoolExecutor(max_workers=10) as executor:
-            photos = executor.map(self._download_photo, photos_references)
+        if places:
+            with futures.ThreadPoolExecutor(max_workers=10) as executor:
+                photos = executor.map(self._download_photo, photos_references)
 
-            for photo, place in zip(photos, places):
-                if photo['status'] == 200:
-                    place['photo_name'] = photo['results']
+                for photo, place in zip(photos, places):
+                    if photo['status'] == 200:
+                        place_photo = Place.objects.create(place_id=str(place['place_id']), base_photo=photo['results'])
+                        place_photo.save()
+                        place['photo_name'] = photo['results']
 
         return places
             

@@ -1,46 +1,40 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from google_APIs.controller import API_Controller
+from google_APIs.controller import GoogleMapsController
+from flickr_API.controller import FlickrController
+from WebApp_core.controller import Controller
 from happy_traveller.mixins import get_random_country
 
 # Create your views here.
 def home(request):
-    api = API_Controller()
+    controller = Controller(request=request)
     country = get_random_country()
-    samples = 3
+    #controller.flickr_controller.most_famous_place()
+    print(country)
+    controller.google_maps_controller.samples = 1
     context = {}
 
     if request.method == 'GET':
-        search = request.GET.get('search')
-        place_id_more_info = request.GET.get('more_info')
+        search = controller.get_tag_search(tag='search')
+        place_id_more_info = controller.get_tag_more_info(tag='more_info')
         #option = request.GET.get('flexRadioDefault')
 
-        if search:
-            result = api.get_place_by_search(search_input=search)
-            if 'photos' in result:
-                temp = api.get_photos_from_place(photos=result['photos'][:samples])
-            else:
-                temp = []
-            result['photos_names'] = temp
-            return render(request, 'WebApp_core/place_details.html', context={"result":result})
+        if search['status'] == 200:
+            result = controller.google_maps_controller.find_place(text_input=search['result'])
+            return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
-        if place_id_more_info:
-            result = api.get_place(place_id=(place_id_more_info))
-            if 'photos' in result:
-                temp = api.get_photos_from_place(photos=result['photos'][:samples])
-            else:
-                temp = []
-            result['photos_names'] = temp
-            return render(request, 'WebApp_core/place_details.html', context={"result":result})
+        if place_id_more_info['status'] == 200:
+            result = controller.google_maps_controller.place(place_id=place_id_more_info['result'])
+            return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
-    places = api.get_places(type='tourist_attraction', country=country)[:samples]
-    tourist_attraction = api.get_photo_from_all_places(places)
+    query = country + ' tourist_attraction'
+    tourist_attraction = controller.google_maps_controller.places(query=query)
     
-    places = api.get_places(type='museum', country=country)[:samples]
-    museum = api.get_photo_from_all_places(places)
+    query = country + ' museum'
+    museum = controller.google_maps_controller.places(query=query)
     
-    places = api.get_places(type='park', country=country)[:samples]
-    park = api.get_photo_from_all_places(places)
+    query = country + ' park'
+    park = controller.google_maps_controller.places(query=query)
 
     context = {
         "country": country,

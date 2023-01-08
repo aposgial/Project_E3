@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'WebApp_core',
     'register',
     'google_APIs',
+    'flickr_API',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,4 @@ RECAPTCHA_PUBLIC_KEY = "6Le5p-AiAAAAAPdjK2MAPyKYAVRx2w7t-iQB01q-"
 RECAPTCHA_REQUIRED_SCORE = 0.1
 
 GOOGLE_API_KEY = "AIzaSyCXkHhw6U2tB0iTRVlorOn4Dr0XQu8f2FI"
+FLICKR_API_KEY = "4ac60ef7197c3c66e7291f93a8b21f37"

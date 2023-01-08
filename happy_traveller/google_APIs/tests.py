@@ -1,4 +1,5 @@
 from django.test import TestCase
+from controller import GoogleMapsController
 import unittest
 from requests import request
                                                                              
@@ -1020,15 +1021,16 @@ class Test_ApiController(unittest.TestCase):
                     }
                 ]
     def test__place_id_by_text(self):
-      self.assertEqual("rome","rome")
+        temp:dict = GoogleMapsController._places(query=self.text_input)
+        self.assertDictEqual(temp, {"status":200, "message":None, "results":self.places})
+      
+
     
     def test__place(self):
         self.assertDictEqual(self.place_id,)
     
     def test__places(self):
         self.assertAlmostEqual("Paris","Paris")
-
-    
 
 if __name__ == '__main__':
     unittest.main()

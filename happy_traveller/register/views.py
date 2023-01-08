@@ -4,30 +4,28 @@ from django.contrib.auth import login, logout, authenticate
 from happy_traveller.mixins import reCAPTCHAValidation
 from django.contrib.auth.models import User
 from happy_traveller.mixins import *
-from google_APIs.controller import API_Controller
-from WebApp_core.controller import Controller
+from register.controller import Controller
 from django.conf import settings
 from .forms import *
 
 
 @login_required(login_url='signin')
 def account(request):
-    api = API_Controller(request=request)
     controller = Controller(request=request)
     location = get_current_location()['loc']
-    api.samples = 3
+    controller.google_maps_controller.samples = 3
     context = {}
-    place_id_more_info = controller.get_tag_more_info(tag='more_info')
+    place_id_more_info = controller.webapp_core_controller.get_tag_more_info(tag='more_info')
     
     if place_id_more_info['status'] == 200:
-        result = api.place(place_id=place_id_more_info['result'])
-        return render(request, 'WebApp_core/place_details.html', context={"result":result})
+        result = controller.google_maps_controller.place(place_id=place_id_more_info['result'])
+        return render(request, 'WebApp_core/place_details.html', context={"result":result['results']})
 
-    hotel = api.near_by_places(location=location, type='hotel')
+    hotel = controller.google_maps_controller.near_by_places(location=location, type='hotel')
 
-    cafe = api.near_by_places(location=location, type='cafe')
+    cafe = controller.google_maps_controller.near_by_places(location=location, type='cafe')
 
-    bar = api.near_by_places(location=location, type='bar')
+    bar = controller.google_maps_controller.near_by_places(location=location, type='bar')
 
     context = {
         "hotel": hotel,

@@ -1,6 +1,7 @@
 from django.test import TestCase
 import unittest
 from requests import request
+                                                                             
 # Create your tests here.
 
 class Test_ApiController(unittest.TestCase):
@@ -1022,13 +1023,12 @@ class Test_ApiController(unittest.TestCase):
       self.assertEqual("rome","rome")
     
     def test__place(self):
-        self.assertAlmostEqual("ChIJrRMgU7ZhLxMRxAOFkC7I8Sg","ChIJrRMgU7ZhLxMRxAOFkC7I8Sg")
+        self.assertDictEqual(self.place_id,)
     
     def test__places(self):
         self.assertAlmostEqual("Paris","Paris")
 
-    #def test__near_by_places(self):
-        #self.assertAlmostEqual("")
+    
 
 if __name__ == '__main__':
     unittest.main()

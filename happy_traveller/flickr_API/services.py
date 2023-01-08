@@ -10,7 +10,7 @@ class FlickrApi:
         self.expect = requests.exceptions
 
 
-    def get_place_by_search(self, text_input:str=''):
+    def get_place_by_search(self, text_input:str='') -> dict:
         url = "{base_url}method=flickr.photos.search&api_key={key}&text={text}&accuracy={accuracy}&content_type=1&format=json&nojsoncallback=1".format(
             base_url = self.base_url,
             key = self.key,

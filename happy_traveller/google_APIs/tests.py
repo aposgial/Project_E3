@@ -1,15 +1,17 @@
 from django.test import TestCase
-from controller import GoogleMapsController
+from google_APIs.controller import GoogleMapsController
 import unittest
-from requests import request
+from django.http import HttpRequest
+
 # Create your tests here.
 
 class Test_ApiController(unittest.TestCase):
     def setUp(self):
-        #self.request = request
+        self.request = HttpRequest()
+        self.GooglemapsControllers= GoogleMapsController(request=self.request)
         self.samples = 3
         self.text_input = "rome"
-        self.place_id = "ChIJrRMgU7ZhLxMRxAOFkC7I8Sg"
+        self.place_id = "ChIJu46S-ZZhLxMROG5lkwZ3D7k"
         self.query = "museum"
         self.location="40.6436,22.9309"
         self.radius=1000
@@ -1019,14 +1021,16 @@ class Test_ApiController(unittest.TestCase):
                         "width": 3000
                     }
                 ]
-    def test__place_id_by_text(self):
-        temp:dict = GoogleMapsController._places(query=self.text_input)
-        self.assertDictEqual(temp, {"status":200, "message":None, "results":self.places})
-      
+        self.place={'address_components': [{'long_name': 'Rome', 'short_name': 'Rome', 'types': ['locality', 'political']}, {'long_name': 'Rome', 'short_name': 'Rome', 'types': ['administrative_area_level_3', 'political']}, {'long_name': 'Metropolitan City of Rome', 'short_name': 'RM', 'types': ['administrative_area_level_2', 'political']}, {'long_name': 'Lazio', 'short_name': 'Lazio', 'types': ['administrative_area_level_1', 'political']}, {'long_name': 'Italy', 'short_name': 'IT', 'types': ['country', 'political']}], 'adr_address': '<span class="locality">Rome</span>, <span class="region">Metropolitan City of Rome</span>, <span class="country-name">Italy</span>', 'formatted_address': 'Rome, Metropolitan City of Rome, Italy', 'geometry': {'location': {'lat': 41.9027835, 'lng': 12.4963655}, 'viewport': {'northeast': {'lat': 42.05054624539585, 'lng': 12.73028878823088}, 'southwest': {'lat': 41.76959604595655, 'lng': 12.34170704408109}}}, 'icon': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png', 'icon_background_color': '#7B9EB0', 'icon_mask_base_uri': 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet', 'name': 'Rome', 'photos': [{'height': 3024, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/115152600256821602962">le fab</a>'], 'photo_reference': 'ARywPAKWC-3H995pO5OdUjNFbfWIc8U9uxQuMWIYbDdUVHu5-gHLg-o_RJtllk8WBo6ENrAhtWBD0bbw6ouuEiviBc0Bv8fB76gDmimpDWnezxWVCOgzj64pRi7on7mfYzrB6s2RCE01ejHEJd1ykoBaZ_r8arCqYbQ-2j9P8cCelcv-U4Ik', 'width': 4032}, {'height': 4624, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/100972198880877396077">Günter Kellermann</a>'], 'photo_reference': 'ARywPAKMZcjQ7jqHnNxcHMF4T5lFrh4unps7sjIxDSlVmsy8UZs6N1or90mB4Kdya0fHGx0MuRF6fkkBLaLip8ssrjU2rs47CpEsGD7bbi2PqAqjOVnd5Por12nEIQ0NCOqMie4nKIT7TrAWqeMlCLtmjFuO1Y9_R5qgBlngJsTwCEW5BIWf', 'width': 2604}, {'height': 9000, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/105067273240844869805">Ана Павловић</a>'], 'photo_reference': 'ARywPALMMVP0A0SfumuyxVkkhua2s6bXjCJVfgpULvhMRRPDlE_jgDzSyIwi-YXHtsxxrCbRTmSlveT-E9TMgUN6SJK1HeExEsiU-Cmt5JHJ10kiz9vQqOa5ZQhgK8Z5tWMqIolzI79hg1UC3qdsgkv7dhMJWk9faBTmxkTPrPcjtDkXMoEJ', 'width': 12000}, {'height': 2988, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/101736542057834696103">simon green</a>'], 'photo_reference': 'ARywPAJfGq6gy1JuUvCltfcypxmqQpCPPZO6l2g9y55OH4YlSm1LWnnE_peSdNYEGOD8L4C5cFpK9qv0X0ElTompLwGYHUIGY-ysqiIrktBrhZBZgL3z6tJqER_tFu1zqHzO8eIHeckfSytWJb4HTpHMwuaRMNP0jsVsOjMidR6j_vLLDcfZ', 'width': 5312}, {'height': 2240, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/100606586420303808152">GIANCARLO GENTILE</a>'], 'photo_reference': 'ARywPAL_a5iGuZIngKno90AGijymc5Uql2BTHqzeyQvia6DQhzb1Ej6iJpoZhBT0gAHzOsg7nd0EOqBwApLbp7-d6OXd23z1DqVFo8xm_5RaFzzGmyOtgCJalmg4In8GlPZ_VGO_-BdoW1erywsTOW8IQVqEKnpe-b32_WWFHsGkvfBJdKCy', 'width': 9728}, {'height': 3000, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/110786084813951543755">julia ferro</a>'], 'photo_reference': 'ARywPAK7wgOON-F-g3Tsy9HbRKm5J5Cz5psdbWqwoTf98NEjhLsdykeBOwhnginYx2-9-N8ZuCTSrHT7CGiKSx3DV5aIu5nO8KSFRn5VK1un72mDs7JBHpoXH-ugIWGYHPizMy7bVHVB2fxEP_jeWNACK016BRuvW_4S6f00-fJcjYKEVJR8', 'width': 4000}, {'height': 3024, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/117266157076041644577">Germaine De Brouwer</a>'], 'photo_reference': 'ARywPAIwSlKF0GUYpWgORUvDF_mG-a1QsIROBtl4kVTuOL2SDhq3PBnIPMUAttwszaJuPhHz6zAdSJkcOY79GcrobFM3thQdo7ECc-1E4xtD0YGKyhNnMMjnQ-lCvx_ULvqgV01c2OsaaOmkhdeUvYAQYHHo0R5M04TRGuwqWsRb8E7UFodi', 'width': 4032}, {'height': 4032, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/100297409867339323242">Kerstin Müller</a>'], 'photo_reference': 'ARywPAIGwUyAH2zJ6U1rDISMAV5UaxxtSJqsHzEXR87RRyCT7Pusz86k2CHdRiuG40WkmS2OqO0jJumqGruJhMl0kdH4_BliIPGmoox5bAhdlx3dHJQ5w7UlA8ZKrKZ7raiULWFPBIfQ5of1Y-F9gZO48STW_pfgshRAsziNHY0eIQCUOk6C', 'width': 3024}, {'height': 1868, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/111703851884252448583">Pietro Fiscaletti</a>'], 'photo_reference': 'ARywPAJWpOOVosrD0GpZVyCD-Yc9p1_caSt8GqTPTlnfTpRYuSkl7pF1BybQQUftD-Js3LF9T06KnEK_iXmGxutXNVIKvFEpd5GPIOTrujE9mtHYnNXpCOpmTnUFjr_DS8EEeystztjLv3CR89L-h4YIJpDVD2JzzL3MzMg1IsK7b0JyC8OY', 'width': 4000}, {'height': 2252, 'html_attributions': ['<a href="https://maps.google.com/maps/contrib/101025215632302127486">Ingeborg Mjanger</a>'], 'photo_reference': 'ARywPAJ_9RIxvjs0DiMLOcQTrBsx-9gJBdUC818rqT5dUQE0oV9WiXsVdZUlBn_oH6FlYpc8iR8o1AvxK8_yS-H0n5kKya7kSsbB4-yhBUGJvGBIcQdf3Fd1SnfVAHVABQHHo2Ny19s53oxI7b9axe96dZnvCQGOF825j9GA8N_d-APndqK8', 'width': 4000}], 'place_id': 'ChIJu46S-ZZhLxMROG5lkwZ3D7k', 'reference': 'ChIJu46S-ZZhLxMROG5lkwZ3D7k', 'types': ['locality', 'political'], 'url': 'https://maps.google.com/?q=Rome,+Metropolitan+City+of+Rome,+Italy&ftid=0x132f6196f9928ebb:0xb90f770693656e38', 'utc_offset': 60, 'vicinity': 'Rome', 'website': 'http://www.comune.roma.it/'}
 
-    
+    def test__place_id_by_text(self):
+        temp:dict = self.GooglemapsControllers._place_id_by_text(self.text_input)
+        self.assertDictEqual(temp, {"status":200, "message":None, "results":self.place_id})
+      
     def test__place(self):
-        self.assertAlmostEqual("ChIJrRMgU7ZhLxMRxAOFkC7I8Sg","ChIJrRMgU7ZhLxMRxAOFkC7I8Sg")
+        self.maxDiff = None
+        temp:dict = self.GooglemapsControllers._place(self.place_id)
+        self.assertDictEqual(temp,{"status":200, "message":None,"results":self.place})
     
     def test__places(self):
         self.assertAlmostEqual("Paris","Paris")

@@ -3,6 +3,8 @@ from google_APIs.controller import GoogleMapsController
 import unittest
 from django.http import HttpRequest
 
+from requests import request
+                                                                             
 # Create your tests here.
 
 class Test_ApiController(unittest.TestCase):
@@ -1031,6 +1033,7 @@ class Test_ApiController(unittest.TestCase):
         self.maxDiff = None
         temp:dict = self.GooglemapsControllers._place(self.place_id)
         self.assertDictEqual(temp,{"status":200, "message":None,"results":self.place})
+        self.assertDictEqual(self.place_id)
     
     def test__places(self):
         self.assertAlmostEqual("Paris","Paris")
